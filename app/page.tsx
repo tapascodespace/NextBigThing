@@ -535,7 +535,7 @@ function AboutUs() {
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, fontWeight: 600, lineHeight: 1.5, color: "#111" }}>
-              Your $10k bet and a degen&apos;s $10 bet say the same thing. The market can&apos;t tell expertise from luck.
+              Your $10k bet and Person X&apos;s $10 bet say the same thing. The market can&apos;t tell expertise from luck.
             </p>
           </div>
         </motion.div>
