@@ -57,11 +57,16 @@ const slowTransition = {
    =================================================================== */
 export default function Home() {
   useEffect(() => {
+    window.scrollTo(0, 0);
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    lenis.scrollTo(0, { immediate: true });
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -658,7 +663,7 @@ function AboutUs() {
             INTRODUCING<br />LINEAR MARKETS
           </h2>
           <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.7, color: "#555", marginBottom: "1.25rem" }}>
-            Trade the actual number, not just direction. Your payout scales with how right you are. Settled daily.
+            Trade the actual number, not just direction. Your payout scales with how right you are. Marked-to-market daily.
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.5, color: "#111", fontWeight: 600 }}>
