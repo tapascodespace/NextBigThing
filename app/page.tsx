@@ -667,10 +667,8 @@ function AboutUs() {
             INTRODUCING<br />LINEAR MARKETS
           </h2>
           <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.7, color: "#555", marginBottom: "1.25rem" }}>
-            Trade numbers, not yes/no. If you think it'll end up higher than the market price, you buy. 
-            If you think it'll end up lower, you sell. Your payout scales directly with how right you 
-            are — the further the outcome moves in your favour from your entry, the more you make. 
-            The more wrong you are, the more you lose. One instrument, one position, one clean payoff.
+            Trade numbers, not yes/no. If you think it'll end up higher than the market price, you buy. If lower, you sell. 
+            The further it moves in your favour, the more you make.
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.5, color: "#111", fontWeight: 600 }}>
