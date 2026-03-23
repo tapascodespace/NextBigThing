@@ -536,11 +536,19 @@ function AboutUs() {
             WHY BINARY<br />ISN&apos;T ENOUGH
           </h2>
           <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.7, color: "#555", marginBottom: "1.5rem" }}>
-            Today&apos;s prediction markets reduce everything to yes or no. The real world has magnitude, and magnitude matters.
+              Prediction markets work. Polymarket and Kalshi proved that with $45 billion in volume last year. 
+              But every contract on every platform settles the same way: yes or no. Will inflation be over 0.8%? 
+              Will NVIDIA beat earnings per share estimates? Binary contracts answer the <em>whether</em> — 
+              and are completely silent on the <em>by how much</em>.
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, fontWeight: 600, lineHeight: 1.5, color: "#111" }}>
-              Your $10k bet and Person X&apos;s $10 bet say the same thing. The market can&apos;t tell expertise from luck.
+              NVIDIA reports Q2 earnings in July. You think revenue will be $31.8B. 
+              The market is trading at $31.2B — you see $600M of edge. You buy at 
+              $31.2B with a position sized to your conviction. On Reeshaw, your 
+              entry price and position size encode your entire thesis. The further 
+              revenue settles above $31.2B, the more you make. The further below, 
+              the more you lose. One market. One position. One price that reflects your edge.
             </p>
           </div>
         </motion.div>
@@ -663,11 +671,14 @@ function AboutUs() {
             INTRODUCING<br />LINEAR MARKETS
           </h2>
           <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.7, color: "#555", marginBottom: "1.25rem" }}>
-            Trade the actual number, not just direction. Your payout scales with how right you are. Marked-to-market daily.
+            Trade numbers, not yes/no. If you think it'll end up higher than the market price, you buy. 
+            If you think it'll end up lower, you sell. Your payout scales directly with how right you 
+            are — the further the outcome moves in your favour from your entry, the more you make. 
+            The more wrong you are, the more you lose. One instrument, one position, one clean payoff.
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.5, color: "#111", fontWeight: 600 }}>
-              Interest rates, earnings, elections. Predict anything with precision.
+              Earnings, GDP, goal margins, vote margins — any outcome that has a number has a market.
             </p>
           </div>
         </motion.div>
