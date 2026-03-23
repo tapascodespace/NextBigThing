@@ -688,17 +688,17 @@ const featureBlocks = [
   {
     num: "03",
     label: "SINGLE INSTRUMENT",
-    title: "ONE MARKET,\nNOT TWENTY-FIVE",
+    title: "ONE MARKET PER METRIC,\nNOT TWENTY-FIVE",
     desc: "Twenty-five binary contracts collapsed into one. All your conviction in a single place.",
     highlight: "Deeper liquidity. Tighter spreads. One position.",
     side: "left" as const,
   },
   {
     num: "04",
-    label: "PRECISION PAYOFF",
-    title: "YOUR ENTRY PRICE\nIS YOUR CONVICTION",
-    desc: "Your position on the distribution is your signal. The payoff penalizes imprecision directly.",
-    highlight: "Overconfidence costs money. Self-calibrating by design.",
+    label: "HOW IT PAYS",
+    title: "THE NUMBER IS YOUR PAYOFF",
+    desc: "The market prices NVIDIA Q2 revenue at $31.2B. You think $31.8B, so you buy. \nRevenue prints $31.6B. Every dollar above your entry, you profit.",
+    highlight: "Right by a little, make a little. Right by a lot, make a lot. \nNo asymmetry. Your edge is your reward.",
     side: "right" as const,
   },
   {
