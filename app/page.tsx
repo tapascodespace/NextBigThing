@@ -543,12 +543,8 @@ function AboutUs() {
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, fontWeight: 600, lineHeight: 1.5, color: "#111" }}>
-              NVIDIA reports Q2 earnings in July. You think revenue will be $31.8B. 
-              The market is trading at $31.2B — you see $600M of edge. You buy at 
-              $31.2B with a position sized to your conviction. On Reeshaw, your 
-              entry price and position size encode your entire thesis. The further 
-              revenue settles above $31.2B, the more you make. The further below, 
-              the more you lose. One market. One position. One price that reflects your edge.
+              NVIDIA reports $130.5B in revenue. One trader said $131.0B. Another said $140.0B. Binary markets paid them both $1. 
+              A $9.0B difference in their forecasts. Zero difference in their reward.
             </p>
           </div>
         </motion.div>
