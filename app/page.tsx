@@ -688,8 +688,8 @@ const featureBlocks = [
   {
     num: "03",
     label: "SINGLE INSTRUMENT",
-    title: "ONE MARKET,\nNOT TWENTY-FIVE",
-    desc: "Twenty-five binary contracts collapsed into one. All your conviction in a single place.",
+    title: "ONE MARKET PER METRIC,\nNOT TWENTY-FIVE",
+    desc: "NVIDIA revenue could settle anywhere across a multi-billion dollar range. On a binary platform, that means dozens of separate contracts — each with its own thin order book and spread. Reeshaw replaces them all with a single linear market on the actual figure. One order book. All the liquidity in one place.",
     highlight: "Deeper liquidity. Tighter spreads. One position.",
     side: "left" as const,
   },
