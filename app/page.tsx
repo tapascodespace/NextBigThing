@@ -981,32 +981,197 @@ function Features() {
 /* ───────── Feature Visuals ───────── */
 function FeatureVisual({ index }: { index: number }) {
   if (index === 0) {
-    // Single instrument — show merging lines into one
+    // Single instrument — 20+ binary contracts (left) → 1 linear market (right)
+    const binaryContracts = [
+      { strike: ">$130B?", yes: ".96", no: ".04" },
+      { strike: ">$135B?", yes: ".91", no: ".09" },
+      { strike: ">$140B?", yes: ".85", no: ".15" },
+      { strike: ">$142B?", yes: ".80", no: ".20" },
+      { strike: ">$145B?", yes: ".73", no: ".27" },
+      { strike: ">$147B?", yes: ".67", no: ".33" },
+      { strike: ">$148B?", yes: ".63", no: ".37" },
+      { strike: ">$150B?", yes: ".57", no: ".43" },
+      { strike: ">$152B?", yes: ".50", no: ".50" },
+      { strike: ">$155B?", yes: ".40", no: ".60" },
+      { strike: ">$157B?", yes: ".33", no: ".67" },
+      { strike: ">$160B?", yes: ".25", no: ".75" },
+      { strike: ">$162B?", yes: ".19", no: ".81" },
+      { strike: ">$165B?", yes: ".14", no: ".86" },
+      { strike: ">$170B?", yes: ".08", no: ".92" },
+      { strike: ">$175B?", yes: ".04", no: ".96" },
+      { strike: ">$178B?", yes: ".02", no: ".98" },
+      { strike: ">$180B?", yes: ".01", no: ".99" },
+      { strike: ">$185B?", yes: ".01", no: ".99" },
+      { strike: ">$190B?", yes: ".00", no: "1.0" },
+    ];
     return (
-      <div style={{ background: "#111", borderRadius: 20, padding: "2.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
-        <div style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888", marginBottom: "1.5rem" }}>ORDER BOOK</div>
-        {[
-          { price: "4.38%", size: "45%", side: "bid" },
-          { price: "4.40%", size: "72%", side: "bid" },
-          { price: "4.42%", size: "100%", side: "center" },
-          { price: "4.44%", size: "65%", side: "ask" },
-          { price: "4.46%", size: "35%", side: "ask" },
-        ].map((row) => (
-          <div key={row.price} style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 12 }}>
-            <span style={{ fontFamily: sans, fontSize: 14, color: "#aaa", width: 55 }}>{row.price}</span>
-            <div style={{ flex: 1, height: 8, background: "#1a1a1a", borderRadius: 4, overflow: "hidden" }}>
+      <div style={{
+        background: "#111",
+        borderRadius: 20,
+        padding: "1.5rem",
+        width: "100%",
+        maxWidth: 500,
+        boxShadow: "0 24px 80px rgba(0,0,0,0.25)",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "1rem",
+      }}>
+        {/* ── LEFT: Binary contracts ── */}
+        <div style={{ flex: "0 0 auto", width: 185 }}>
+          <div style={{
+            fontFamily: sans, fontSize: 9, fontWeight: 700,
+            letterSpacing: "0.1em", color: "#c0392b",
+            textTransform: "uppercase", marginBottom: 8,
+          }}>
+            20+ Binary Contracts
+          </div>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 4,
+            marginBottom: 6,
+          }}>
+            {binaryContracts.map((c) => (
+              <div key={c.strike} style={{
+                background: "#1a1a1a",
+                border: "1px solid #2a2a2a",
+                borderRadius: 5,
+                padding: "4px 3px",
+                textAlign: "center",
+              }}>
+                <div style={{
+                  fontFamily: sans, fontSize: 7, fontWeight: 600,
+                  color: "#777", marginBottom: 2, whiteSpace: "nowrap",
+                }}>
+                  {c.strike}
+                </div>
+                <div style={{ display: "flex", gap: 2 }}>
+                  <span style={{
+                    fontFamily: sans, fontSize: 6, fontWeight: 600,
+                    color: "#2aad6e", background: "rgba(42,173,110,0.1)",
+                    borderRadius: 2, padding: "1px 2px", flex: 1,
+                  }}>
+                    Y{c.yes}
+                  </span>
+                  <span style={{
+                    fontFamily: sans, fontSize: 6, fontWeight: 600,
+                    color: "#c0392b", background: "rgba(192,57,43,0.1)",
+                    borderRadius: 2, padding: "1px 2px", flex: 1,
+                  }}>
+                    N{c.no}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{
+            fontFamily: sans, fontSize: 8, color: "#444",
+            textAlign: "center", lineHeight: 1.4,
+          }}>
+            <span style={{ color: "#c0392b", fontWeight: 600 }}>20 contracts</span>
+            {" · fragmented liquidity"}
+          </div>
+        </div>
+
+        {/* ── CENTRE: Arrow ── */}
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+          <svg viewBox="0 0 40 80" fill="none" style={{ width: 40, height: 80 }}>
+            {/* Lines converging from top */}
+            <line x1="5"  y1="0" x2="19" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.5" />
+            <line x1="13" y1="0" x2="19" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.6" />
+            <line x1="27" y1="0" x2="21" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.6" />
+            <line x1="35" y1="0" x2="21" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.5" />
+            {/* Convergence glow */}
+            <circle cx="20" cy="34" r="3" fill="#d4972a" opacity="0.8" />
+            <circle cx="20" cy="34" r="6" fill="#d4972a" opacity="0.12" />
+            {/* Arrow shaft downward */}
+            <line x1="20" y1="38" x2="20" y2="68" stroke="#d4972a" strokeWidth="1.5" />
+            {/* Arrowhead pointing right (rotated concept — pointing down toward linear) */}
+            <path d="M13 61 L20 70 L27 61"
+              stroke="#d4972a" strokeWidth="1.5" fill="none"
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        {/* ── RIGHT: Linear market ── */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{
+            fontFamily: sans, fontSize: 9, fontWeight: 700,
+            letterSpacing: "0.1em", color: "#2aad6e",
+            textTransform: "uppercase", marginBottom: 8,
+          }}>
+            1 Linear Market
+          </div>
+          <div style={{
+            background: "linear-gradient(135deg, #0d1a0f 0%, #111 100%)",
+            border: "1px solid rgba(42,173,110,0.2)",
+            borderRadius: 10,
+            padding: "12px",
+          }}>
+            {/* Header */}
+            <div style={{
+              display: "flex", justifyContent: "space-between",
+              alignItems: "center", marginBottom: 10,
+            }}>
+              <span style={{
+                fontFamily: sans, fontSize: 11, fontWeight: 700, color: "#fff",
+              }}>
+                NVDA 2026 Revenue
+              </span>
+              <span style={{
+                fontFamily: sans, fontSize: 7, fontWeight: 700,
+                letterSpacing: "0.08em", color: "#2aad6e",
+                background: "rgba(42,173,110,0.12)",
+                border: "1px solid rgba(42,173,110,0.25)",
+                borderRadius: 3, padding: "2px 5px",
+              }}>
+                LINEAR
+              </span>
+            </div>
+            {/* Bid / Ask */}
+            <div style={{ display: "flex", gap: 5, marginBottom: 8 }}>
               <div style={{
-                width: row.size,
-                height: "100%",
-                borderRadius: 4,
-                background: row.side === "center" ? "#d4972a" : row.side === "bid" ? "#2aad6e" : "#c0392b",
-                opacity: row.side === "center" ? 1 : 0.6,
-              }} />
+                flex: 1, textAlign: "center", padding: "7px 0", borderRadius: 7,
+                background: "rgba(42,173,110,0.08)",
+                border: "1px solid rgba(42,173,110,0.2)",
+              }}>
+                <div style={{
+                  fontFamily: sans, fontSize: 8, fontWeight: 600,
+                  letterSpacing: "0.06em", color: "#2aad6e", opacity: 0.7, marginBottom: 2,
+                }}>BID</div>
+                <div style={{
+                  fontFamily: sans, fontSize: 15, fontWeight: 800,
+                  color: "#2aad6e", letterSpacing: "-0.02em",
+                }}>$151.2B</div>
+              </div>
+              <div style={{
+                flex: 1, textAlign: "center", padding: "7px 0", borderRadius: 7,
+                background: "rgba(192,57,43,0.08)",
+                border: "1px solid rgba(192,57,43,0.2)",
+              }}>
+                <div style={{
+                  fontFamily: sans, fontSize: 8, fontWeight: 600,
+                  letterSpacing: "0.06em", color: "#c0392b", opacity: 0.7, marginBottom: 2,
+                }}>ASK</div>
+                <div style={{
+                  fontFamily: sans, fontSize: 15, fontWeight: 800,
+                  color: "#c0392b", letterSpacing: "-0.02em",
+                }}>$151.8B</div>
+              </div>
+            </div>
+            {/* Spread */}
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <div style={{ flex: 1, height: 1, background: "#2a2a2a" }} />
+              <span style={{
+                fontFamily: sans, fontSize: 8, fontWeight: 600,
+                color: "#d4972a", letterSpacing: "0.04em", whiteSpace: "nowrap",
+              }}>
+                all liquidity here
+              </span>
+              <div style={{ flex: 1, height: 1, background: "#2a2a2a" }} />
             </div>
           </div>
-        ))}
-        <div style={{ fontFamily: sans, fontSize: 12, color: "#555", textAlign: "center", marginTop: "1.25rem" }}>
-          Single deep order book
         </div>
       </div>
     );
