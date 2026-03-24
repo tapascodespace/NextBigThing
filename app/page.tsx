@@ -53,6 +53,114 @@ const slowTransition = {
 };
 
 /* ===================================================================
+   BINARY PAYOFF CHART — Section 01 graphic
+   =================================================================== */
+function BinaryPayoffChart() {
+  return (
+    <div style={{
+      background: "#111",
+      borderRadius: 20,
+      padding: "2.5rem 3rem 2.25rem",
+      width: "100%",
+      maxWidth: 420,
+      boxShadow: "0 24px 80px rgba(0,0,0,0.15)",
+    }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase" as const, color: "#fff" }}>
+          Binary Payoff
+        </span>
+        <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase" as const, color: "#666", background: "#1a1a1a", padding: "4px 10px", borderRadius: 4 }}>
+          NVDA 2026 Revenue Beats $150B?
+        </span>
+      </div>
+
+      {/* SVG Chart */}
+      <div style={{ position: "relative", width: "100%", height: 280 }}>
+        <svg viewBox="0 0 540 270" style={{ width: "100%", height: "100%" }}>
+          {/* P&L label rotated */}
+          <text x={14} y={130} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle" transform="rotate(-90, 14, 130)">P&amp;L</text>
+
+          {/* Grid lines */}
+          <line x1={80} y1={30} x2={504} y2={30} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={130} x2={504} y2={130} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={230} x2={504} y2={230} stroke="#1a1a1a" strokeWidth={1}/>
+
+          {/* Y-axis labels */}
+          <text x={68} y={34} fill="#555" fontSize={11} fontFamily={sans} textAnchor="end">+$0.50</text>
+          <text x={68} y={134} fill="#555" fontSize={11} fontFamily={sans} textAnchor="end">$0</text>
+          <text x={68} y={234} fill="#555" fontSize={11} fontFamily={sans} textAnchor="end">-$0.50</text>
+
+          {/* Loss zone shading */}
+          <rect x={80} y={130} width={141} height={100} fill="#3d1515" opacity={0.3}/>
+          {/* Win zone shading */}
+          <rect x={221} y={30} width={283} height={100} fill="#1a3d1a" opacity={0.3}/>
+
+          {/* Step function: flat loss → jump at strike → flat win */}
+          <line x1={80} y1={230} x2={221} y2={230} stroke="#ef4444" strokeWidth={2.5}/>
+          <line x1={221} y1={230} x2={221} y2={30} stroke="#888" strokeWidth={1} strokeDasharray="4,4"/>
+          <line x1={221} y1={30} x2={504} y2={30} stroke="#22c55e" strokeWidth={2.5}/>
+
+          {/* Strike label */}
+          <text x={221} y={252} fill="#888" fontSize={10} fontFamily={sans} textAnchor="middle">$150B</text>
+          <text x={221} y={264} fill="#555" fontSize={9} fontFamily={sans} textAnchor="middle">STRIKE</text>
+
+          {/* X-axis range labels */}
+          <text x={80} y={252} fill="#555" fontSize={10} fontFamily={sans} textAnchor="start">$130B</text>
+          <text x={504} y={252} fill="#555" fontSize={10} fontFamily={sans} textAnchor="end">$190B</text>
+
+          {/* X-axis base line */}
+          <line x1={80} y1={240} x2={504} y2={240} stroke="#333" strokeWidth={1}/>
+
+          {/* X-axis title */}
+          <text x={292} y={264} fill="#444" fontSize={9} fontFamily={sans} fontWeight={500} textAnchor="middle">NVIDIA 2026 Revenue</text>
+
+          {/* Trader A marker at $153B */}
+          <line x1={243} y1={30} x2={243} y2={48} stroke="#d4a843" strokeWidth={1.5}/>
+          <circle cx={243} cy={30} r={5} fill="#d4a843"/>
+          <rect x={211} y={52} width={64} height={20} rx={4} fill="#d4a843" opacity={0.15}/>
+          <text x={243} y={66} fill="#d4a843" fontSize={10} fontFamily={sans} fontWeight={600} textAnchor="middle">Trader A</text>
+          <text x={243} y={80} fill="#d4a843" fontSize={9} fontFamily={sans} textAnchor="middle">$153B</text>
+
+          {/* Trader B marker at $180B */}
+          <line x1={433} y1={30} x2={433} y2={48} stroke="#ef4444" strokeWidth={1.5}/>
+          <circle cx={433} cy={30} r={5} fill="#ef4444"/>
+          <rect x={401} y={52} width={64} height={20} rx={4} fill="#ef4444" opacity={0.15}/>
+          <text x={433} y={66} fill="#ef4444" fontSize={10} fontFamily={sans} fontWeight={600} textAnchor="middle">Trader B</text>
+          <text x={433} y={80} fill="#ef4444" fontSize={9} fontFamily={sans} textAnchor="middle">$180B</text>
+
+          {/* Same payout bracket */}
+          <line x1={243} y1={18} x2={433} y2={18} stroke="#555" strokeWidth={1}/>
+          <line x1={243} y1={15} x2={243} y2={21} stroke="#555" strokeWidth={1}/>
+          <line x1={433} y1={15} x2={433} y2={21} stroke="#555" strokeWidth={1}/>
+          <text x={338} y={12} fill="#666" fontSize={9} fontFamily={sans} fontWeight={500} textAnchor="middle">SAME PAYOUT</text>
+
+          {/* Actual revenue marker at $153.5B */}
+          <line x1={246} y1={92} x2={246} y2={108} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3"/>
+          <text x={246} y={118} fill="#fff" fontSize={9} fontFamily={sans} fontWeight={500} textAnchor="middle" opacity={0.6}>Actual: $153.5B</text>
+        </svg>
+      </div>
+
+      {/* Callout */}
+      <div style={{ borderLeft: "3px solid #d4a843", paddingLeft: 16, marginTop: 8 }}>
+        <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6 }}>
+          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader A: $153B</strong> (nailed it)
+        </div>
+        <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6 }}>
+          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader B: $180B</strong> ($27B off)
+        </div>
+        <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6, marginTop: 4 }}>
+          Both paid exactly <strong style={{ color: "#fff", fontWeight: 600 }}>+$0.50</strong>.
+        </div>
+        <div style={{ fontFamily: sans, color: "#d4a843", fontSize: 14, fontWeight: 600, marginTop: 8, lineHeight: 1.5 }}>
+          Trader A gets nothing for being right.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================================================================
    PAGE
    =================================================================== */
 export default function Home() {
@@ -555,32 +663,7 @@ function AboutUs() {
           transition={{ ...smoothTransition, delay: 0.2 }}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <div style={{
-            background: "#111",
-            borderRadius: 20,
-            padding: "2.5rem",
-            width: "100%",
-            maxWidth: 420,
-            boxShadow: "0 24px 80px rgba(0,0,0,0.15)",
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid #222", paddingBottom: "0.75rem" }}>
-              <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#888" }}>MARKET</span>
-              <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#888" }}>TYPE</span>
-            </div>
-            {[
-              { market: "Fed Rate Cut?", type: "BINARY", color: "#c0392b" },
-              { market: "NVDA Beats?", type: "BINARY", color: "#c0392b" },
-              { market: "Election Winner?", type: "BINARY", color: "#c0392b" },
-            ].map((row) => (
-              <div key={row.market} style={{ display: "flex", justifyContent: "space-between", padding: "0.6rem 0", borderBottom: "1px solid #1a1a1a" }}>
-                <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 500, color: "#eee" }}>{row.market}</span>
-                <span style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, color: row.color }}>{row.type}</span>
-              </div>
-            ))}
-            <p style={{ fontFamily: sans, fontSize: 11, color: "#555", marginTop: "1rem", textAlign: "center" }}>
-              One outcome. No precision. No edge.
-            </p>
-          </div>
+          <BinaryPayoffChart />
         </motion.div>
       </div>
       </section>
