@@ -689,7 +689,7 @@ const featureBlocks = [
     num: "03",
     label: "SINGLE INSTRUMENT",
     title: "ONE MARKET PER METRIC,\nNOT TWENTY-FIVE",
-    desc: "Twenty-five binary contracts collapsed into one. All your conviction in a single place.",
+    desc: "On a binary platform, covering NVIDIA's full revenue range means dozens of separate contracts — each fragmenting liquidity further. \nReeshaw replaces them with one market on the actual figure. One order book. All the liquidity in one place.",
     highlight: "Deeper liquidity. Tighter spreads. One position.",
     side: "left" as const,
   },
