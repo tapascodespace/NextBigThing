@@ -161,6 +161,150 @@ function BinaryPayoffChart() {
 }
 
 /* ===================================================================
+   LINEAR PAYOFF CHART — Section 02 graphic
+   Uses IG/CME-style P&L breakdown: (Settlement - Entry) × Contracts
+   =================================================================== */
+function LinearPayoffChart() {
+  return (
+    <div style={{
+      background: "#111",
+      borderRadius: 20,
+      padding: "2.5rem 2.5rem 2rem",
+      width: "100%",
+      maxWidth: 420,
+      boxShadow: "0 24px 80px rgba(0,0,0,0.15)",
+    }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
+        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase" as const, color: "#fff" }}>
+          Linear Payoff
+        </span>
+        <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase" as const, color: "#666", background: "#1a1a1a", padding: "4px 10px", borderRadius: 4 }}>
+          NVDA Q2 2026 Revenue
+        </span>
+      </div>
+
+      {/* Stats row */}
+      <div style={{ display: "flex", gap: 24, marginBottom: "1.25rem", padding: "14px 16px", background: "#1a1a1a", borderRadius: 10 }}>
+        {[
+          { label: "ENTRY", value: "$150.0B", color: "#fff" },
+          { label: "SETTLEMENT", value: "$153.5B", color: "#fff" },
+          { label: "CONTRACTS", value: "100", color: "#fff" },
+        ].map((stat) => (
+          <div key={stat.label} style={{ display: "flex", flexDirection: "column" as const, gap: 3 }}>
+            <span style={{ fontFamily: sans, fontSize: 9, fontWeight: 600, letterSpacing: "1.2px", color: "#555" }}>{stat.label}</span>
+            <span style={{ fontFamily: sans, fontSize: 16, fontWeight: 700, color: stat.color }}>{stat.value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* P&L formula breakdown — IG/CME style */}
+      <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, flexWrap: "wrap" as const }}>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>(</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$153.5B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>-</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$150.0B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>)</span>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
+          <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$350</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 4 }}>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
+        </div>
+      </div>
+
+      {/* SVG Chart
+        X-axis: $140B to $165B (25B range)
+        Y-axis: -$1,000 to +$1,000
+        100 contracts, $1 per $1B per contract = $100 per $1B
+        Chart area: x 80→504 (424px), y 25→225 (200px)
+        Entry $150B: x=250, y=125 ($0)
+        Settlement $153.5B: x=309, y=125-(350/1000)*100=90
+      */}
+      <div style={{ position: "relative", width: "100%", height: 260 }}>
+        <svg viewBox="0 0 540 260" style={{ width: "100%", height: "100%" }}>
+          {/* P&L label rotated */}
+          <text x={14} y={125} fill="#555" fontSize={15} fontFamily={sans} fontWeight={500} textAnchor="middle" transform="rotate(-90, 14, 125)">P&amp;L</text>
+
+          {/* Grid lines — $500 intervals */}
+          <line x1={80} y1={25} x2={504} y2={25} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={75} x2={504} y2={75} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={125} x2={504} y2={125} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={175} x2={504} y2={175} stroke="#1a1a1a" strokeWidth={1}/>
+          <line x1={80} y1={225} x2={504} y2={225} stroke="#1a1a1a" strokeWidth={1}/>
+
+          {/* Y-axis labels */}
+          <text x={68} y={29} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$1,000</text>
+          <text x={68} y={79} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$500</text>
+          <text x={68} y={129} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">$0</text>
+          <text x={68} y={179} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$500</text>
+          <text x={68} y={229} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$1,000</text>
+
+          {/* Profit zone shading */}
+          <polygon points="250,125 504,125 504,25" fill="#1a3d1a" opacity={0.2}/>
+          {/* Loss zone shading */}
+          <polygon points="250,125 80,125 80,225" fill="#3d1515" opacity={0.2}/>
+
+          {/* Linear P&L line
+            $140B (x=80): P&L = -$1,000 → y=225
+            $150B (x=250): P&L = $0 → y=125
+            $160B (x=419): P&L = +$1,000 → y=25
+            $165B (x=504): P&L = +$1,500 → clipped above
+          */}
+          {/* Loss segment */}
+          <line x1={80} y1={225} x2={250} y2={125} stroke="#ef4444" strokeWidth={2.5}/>
+          {/* Profit segment */}
+          <line x1={250} y1={125} x2={419} y2={25} stroke="#22c55e" strokeWidth={2.5}/>
+          {/* Clipped extension */}
+          <line x1={419} y1={25} x2={504} y2={25} stroke="#22c55e" strokeWidth={1.5} strokeDasharray="4,4" opacity={0.4}/>
+
+          {/* Zero line highlight */}
+          <line x1={80} y1={125} x2={504} y2={125} stroke="#333" strokeWidth={1.5}/>
+
+          {/* Entry marker at $150B */}
+          <circle cx={250} cy={125} r={5} fill="#ffffff" stroke="#111" strokeWidth={2}/>
+          <line x1={250} y1={125} x2={250} y2={240} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3" opacity={0.3}/>
+          <text x={250} y={250} fill="#fff" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle" opacity={0.8}>$150B</text>
+
+          {/* Settlement marker at $153.5B
+            x = 80 + (13.5/25)*424 = 309
+            P&L = +$350 → y = 125 - (350/1000)*100 = 90
+          */}
+          <line x1={309} y1={90} x2={309} y2={240} stroke="#22c55e" strokeWidth={1} strokeDasharray="3,3" opacity={0.4}/>
+          <circle cx={309} cy={90} r={5} fill="#22c55e"/>
+          <text x={309} y={250} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle">$153.5B</text>
+
+          {/* Horizontal dashed line from settlement to Y-axis */}
+          <line x1={80} y1={90} x2={309} y2={90} stroke="#22c55e" strokeWidth={1} strokeDasharray="4,4" opacity={0.3}/>
+
+          {/* P&L annotation at settlement point */}
+          <rect x={315} y={78} width={60} height={24} rx={4} fill="#22c55e" opacity={0.15}/>
+          <text x={345} y={95} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={700} textAnchor="middle">+$350</text>
+
+          {/* X-axis line */}
+          <line x1={80} y1={237} x2={504} y2={237} stroke="#333" strokeWidth={1}/>
+
+          {/* X-axis range labels */}
+          <text x={80} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="start">$140B</text>
+          <text x={504} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="end">$165B</text>
+
+          {/* X-axis subtitle labels */}
+          <text x={250} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">ENTRY</text>
+          <text x={309} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">SETTLEMENT</text>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+/* ===================================================================
    PAGE
    =================================================================== */
 export default function Home() {
@@ -691,45 +835,7 @@ function AboutUs() {
           transition={smoothTransition}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <div style={{
-            background: "#111",
-            borderRadius: 20,
-            padding: "2.5rem",
-            width: "100%",
-            maxWidth: 420,
-            boxShadow: "0 24px 80px rgba(0,0,0,0.15)",
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-              <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>FED FUNDS RATE</span>
-              <span style={{ fontFamily: sans, fontSize: 11, color: "#2aad6e" }}>● LIVE</span>
-            </div>
-            <div style={{ fontFamily: sans, fontSize: 11, color: "#666", marginBottom: "1rem" }}>Your prediction: 4.42%</div>
-            {/* Mini chart */}
-            <svg viewBox="0 0 280 80" style={{ width: "100%", height: 80 }}>
-              <defs>
-                <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#d4972a" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#d4972a" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path d="M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18" fill="none" stroke="#d4972a" strokeWidth="2">
-                <animate attributeName="d" dur="4s" repeatCount="indefinite"
-                  values="M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18;M0,58 Q30,50 60,45 T120,38 T180,25 T240,20 T280,22;M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18" />
-              </path>
-              <path d="M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18 L280,80 L0,80 Z" fill="url(#chartFill)">
-                <animate attributeName="d" dur="4s" repeatCount="indefinite"
-                  values="M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18 L280,80 L0,80 Z;M0,58 Q30,50 60,45 T120,38 T180,25 T240,20 T280,22 L280,80 L0,80 Z;M0,60 Q30,55 60,50 T120,35 T180,30 T240,22 T280,18 L280,80 L0,80 Z" />
-              </path>
-              {/* Dot at end */}
-              <circle cx="280" cy="18" r="4" fill="#d4972a">
-                <animate attributeName="cy" dur="4s" repeatCount="indefinite" values="18;22;18" />
-              </circle>
-            </svg>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "0.75rem" }}>
-              <span style={{ fontFamily: sans, fontSize: 12, color: "#aaa" }}>Precision: <span style={{ color: "#2aad6e", fontWeight: 600 }}>High</span></span>
-              <span style={{ fontFamily: sans, fontSize: 12, color: "#aaa" }}>P&L: <span style={{ color: "#2aad6e", fontWeight: 600 }}>+$842</span></span>
-            </div>
-          </div>
+          <LinearPayoffChart />
         </motion.div>
 
         {/* Right — text */}
