@@ -1023,8 +1023,9 @@ function FeatureVisual({ index }: { index: number }) {
             fontFamily: sans, fontSize: 9, fontWeight: 700,
             letterSpacing: "0.1em", color: "#c0392b",
             textTransform: "uppercase", marginBottom: 8,
+            textAlign: "center",
           }}>
-            20+ Binary Contracts
+            20+ Binary Markets
           </div>
           <div style={{
             display: "grid",
@@ -1069,7 +1070,7 @@ function FeatureVisual({ index }: { index: number }) {
             fontFamily: sans, fontSize: 8, color: "#444",
             textAlign: "center", lineHeight: 1.4,
           }}>
-            <span style={{ color: "#c0392b", fontWeight: 600 }}>20 contracts</span>
+            <span style={{ color: "#c0392b", fontWeight: 600 }}>20 markets</span>
             {" · 20+ bid/asks · fragmented liquidity"}
           </div>
         </div>
@@ -1101,6 +1102,7 @@ function FeatureVisual({ index }: { index: number }) {
             fontFamily: sans, fontSize: 9, fontWeight: 700,
             letterSpacing: "0.1em", color: "#2aad6e",
             textTransform: "uppercase", marginBottom: 8,
+            textAlign: "center",
           }}>
             1 Linear Market
           </div>
