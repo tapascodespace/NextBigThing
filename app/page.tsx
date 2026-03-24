@@ -153,7 +153,7 @@ function BinaryPayoffChart() {
           Both paid exactly <strong style={{ color: "#fff", fontWeight: 600 }}>+$0.50</strong>.
         </div>
         <div style={{ fontFamily: sans, color: "#d4a843", fontSize: 14, fontWeight: 600, marginTop: 8, lineHeight: 1.5 }}>
-          Trader A gets nothing for being right.
+          Trader A's edge was massive. Trader B's edge was zero. Same reward.
         </div>
       </div>
     </div>
