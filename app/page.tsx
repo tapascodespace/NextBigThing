@@ -1171,25 +1171,62 @@ function FeatureVisual({ index }: { index: number }) {
   }
 
   if (index === 1) {
-    // Precision payoff — target graphic
+    // Linear payoff diagram — THE product visual
     return (
-      <div style={{ background: "#111", borderRadius: 20, padding: "2.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
-        <div style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888", marginBottom: "1.25rem" }}>PAYOFF CURVE</div>
-        <svg viewBox="0 0 260 120" style={{ width: "100%", height: 160 }}>
-          {/* Bell curve */}
-          <path d="M0,110 Q30,108 60,100 Q90,80 130,20 Q170,80 200,100 Q230,108 260,110" fill="none" stroke="#d4972a" strokeWidth="2" />
-          <path d="M0,110 Q30,108 60,100 Q90,80 130,20 Q170,80 200,100 Q230,108 260,110 L260,120 L0,120 Z" fill="#d4972a" fillOpacity="0.08" />
-          {/* Center line */}
-          <line x1="130" y1="15" x2="130" y2="120" stroke="#d4972a" strokeWidth="1" strokeDasharray="3,3" opacity="0.4" />
-          {/* Arrow pointing to peak */}
-          <circle cx="130" cy="20" r="4" fill="#d4972a" />
-          <text x="140" y="16" fill="#2aad6e" fontSize="9" fontFamily="Inter, sans-serif">MAX PAYOUT</text>
-          <text x="10" y="105" fill="#555" fontSize="8" fontFamily="Inter, sans-serif">Less precise</text>
-          <text x="200" y="105" fill="#555" fontSize="8" fontFamily="Inter, sans-serif">Less precise</text>
-        </svg>
-        <div style={{ fontFamily: sans, fontSize: 12, color: "#555", textAlign: "center", marginTop: "0.75rem" }}>
-          Closer to outcome = higher payout
+      <div style={{ background: "#111", borderRadius: 20, padding: "2rem 2rem 1.75rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
+        {/* Header */}
+        <div style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888", marginBottom: "0.6rem" }}>
+          PAYOFF CURVE
         </div>
+        {/* Entry callout */}
+        <div style={{ fontFamily: sans, fontSize: 12, color: "#aaa", marginBottom: "1rem", lineHeight: 1.4 }}>
+          {"Entry: "}
+          <span style={{ color: "#d4972a", fontWeight: 700 }}>$150B</span>
+          <span style={{ color: "#555" }}>{" — NVIDIA 2026 Revenue"}</span>
+        </div>
+        {/*
+          viewBox 0 0 300 195 — Plot x:50→280, y:12→161, zero y=88, entry x=165
+          Line: bottom-left corner (50,161) → top-right (280,15)
+          Loss triangle (50,161)→(165,88)→(50,88): base=115 height=73
+          Profit triangle (165,88)→(280,15)→(280,88): base=115 height=73  ← equal areas
+        */}
+        <svg viewBox="0 0 300 195" style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}>
+          {/* Zero axis */}
+          <line x1="50" y1="88" x2="280" y2="88" stroke="#2a2a2a" strokeWidth="1" />
+          {/* Loss shading */}
+          <polygon points="50,161 165,88 50,88" fill="#c0392b" fillOpacity="0.13" />
+          {/* Profit shading */}
+          <polygon points="165,88 280,15 280,88" fill="#2aad6e" fillOpacity="0.13" />
+          {/* P&L line */}
+          <line x1="50" y1="161" x2="280" y2="15" stroke="#d4972a" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Entry marker */}
+          <circle cx="165" cy="88" r="4.5" fill="#d4972a" />
+          <circle cx="165" cy="88" r="9" fill="#d4972a" fillOpacity="0.15" />
+          {/* Entry dashed drop line */}
+          <line x1="165" y1="88" x2="165" y2="161" stroke="#d4972a" strokeWidth="1" strokeDasharray="3,3" opacity="0.4" />
+          {/* Zone labels */}
+          <text x="100" y="75" fill="#c0392b" fontSize="9.5" fontFamily="Inter, sans-serif" fontWeight="700" textAnchor="middle" opacity="0.65">LOSS</text>
+          <text x="228" y="75" fill="#2aad6e" fontSize="9.5" fontFamily="Inter, sans-serif" fontWeight="700" textAnchor="middle" opacity="0.65">PROFIT</text>
+          {/* Y-axis */}
+          <line x1="50" y1="12" x2="50" y2="161" stroke="#333" strokeWidth="1" />
+          <text x="0" y="0" transform="translate(12,88) rotate(-90)" fill="#666" fontSize="9" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing="0.06em">P&amp;L</text>
+          {/* Y ticks */}
+          <line x1="46" y1="15" x2="50" y2="15" stroke="#2aad6e" strokeWidth="1" opacity="0.6" />
+          <text x="44" y="19" fill="#2aad6e" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">+$40</text>
+          <line x1="46" y1="88" x2="50" y2="88" stroke="#555" strokeWidth="1" />
+          <text x="44" y="91" fill="#555" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end">0</text>
+          <line x1="46" y1="161" x2="50" y2="161" stroke="#c0392b" strokeWidth="1" opacity="0.6" />
+          <text x="44" y="157" fill="#c0392b" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">−$40</text>
+          {/* X-axis */}
+          <line x1="50" y1="161" x2="280" y2="161" stroke="#333" strokeWidth="1" />
+          <line x1="50"  y1="161" x2="50"  y2="165" stroke="#555"    strokeWidth="1" />
+          <line x1="165" y1="161" x2="165" y2="165" stroke="#d4972a" strokeWidth="1" />
+          <line x1="280" y1="161" x2="280" y2="165" stroke="#555"    strokeWidth="1" />
+          <text x="50"  y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$110B</text>
+          <text x="165" y="174" fill="#d4972a" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle" fontWeight="700">$150B</text>
+          <text x="280" y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$190B</text>
+          <text x="165" y="188" fill="#555" fontSize="9" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing="0.05em">NVIDIA 2026 Revenue</text>
+        </svg>
       </div>
     );
   }
