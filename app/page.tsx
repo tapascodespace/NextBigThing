@@ -1114,22 +1114,12 @@ function FeatureVisual({ index }: { index: number }) {
           }}>
             {/* Header */}
             <div style={{
-              display: "flex", justifyContent: "space-between",
-              alignItems: "center", marginBottom: 10,
+              textAlign: "center", marginBottom: 10,
             }}>
               <span style={{
                 fontFamily: sans, fontSize: 11, fontWeight: 700, color: "#fff",
               }}>
                 NVDA 2026 Revenue
-              </span>
-              <span style={{
-                fontFamily: sans, fontSize: 7, fontWeight: 700,
-                letterSpacing: "0.08em", color: "#2aad6e",
-                background: "rgba(42,173,110,0.12)",
-                border: "1px solid rgba(42,173,110,0.25)",
-                borderRadius: 3, padding: "2px 5px",
-              }}>
-                LINEAR
               </span>
             </div>
             {/* Bid / Ask */}
