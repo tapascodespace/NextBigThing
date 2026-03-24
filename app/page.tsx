@@ -536,14 +536,11 @@ function AboutUs() {
             WHY BINARY<br />ISN&apos;T ENOUGH
           </h2>
           <p style={{ fontFamily: sans, fontSize: 17, lineHeight: 1.7, color: "#555", marginBottom: "1.5rem" }}>
-              Prediction markets work. Polymarket and Kalshi proved that with $45 billion in volume last year. 
-              But every contract on every platform settles the same way: yes or no. Will inflation be over 0.8%? 
-              Will NVIDIA beat earnings per share estimates? Binary contracts answer the <em>whether</em> — 
-              and are completely silent on the <em>by how much</em>.
+              Will inflation exceed 3%? Will NVIDIA beat earnings? Every prediction market asks yes or no. Nobody asks by how much.
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, fontWeight: 600, lineHeight: 1.5, color: "#111" }}>
-              NVIDIA reports $130.5B in revenue. One trader said $131.0B. Another said $140.0B. Binary markets paid them both $1. 
+              NVIDIA reports $150B in revenue. One trader predicted $151B. Another said $160B. Binary markets paid them both $1. 
               A $9.0B difference in their forecasts. Zero difference in their reward.
             </p>
           </div>
