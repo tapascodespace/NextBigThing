@@ -1070,25 +1070,26 @@ function FeatureVisual({ index }: { index: number }) {
             textAlign: "center", lineHeight: 1.4,
           }}>
             <span style={{ color: "#c0392b", fontWeight: 600 }}>20 contracts</span>
-            {" · fragmented liquidity"}
+            {" · 20+ bid/asks · fragmented liquidity"}
           </div>
         </div>
 
-        {/* ── CENTRE: Arrow ── */}
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-          <svg viewBox="0 0 40 80" fill="none" style={{ width: 40, height: 80 }}>
-            {/* Lines converging from top */}
-            <line x1="5"  y1="0" x2="19" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.5" />
-            <line x1="13" y1="0" x2="19" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.6" />
-            <line x1="27" y1="0" x2="21" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.6" />
-            <line x1="35" y1="0" x2="21" y2="34" stroke="#444" strokeWidth="0.7" opacity="0.5" />
+        {/* ── CENTRE: Arrow pointing right ── */}
+        <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center" }}>
+          <svg viewBox="0 0 54 40" fill="none" style={{ width: 54, height: 40 }}>
+            {/* Lines converging from left toward the glow point */}
+            <line x1="0" y1="4"  x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.5" />
+            <line x1="0" y1="12" x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.6" />
+            <line x1="0" y1="20" x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.6" />
+            <line x1="0" y1="28" x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.6" />
+            <line x1="0" y1="36" x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.5" />
             {/* Convergence glow */}
-            <circle cx="20" cy="34" r="3" fill="#d4972a" opacity="0.8" />
-            <circle cx="20" cy="34" r="6" fill="#d4972a" opacity="0.12" />
-            {/* Arrow shaft downward */}
-            <line x1="20" y1="38" x2="20" y2="68" stroke="#d4972a" strokeWidth="1.5" />
-            {/* Arrowhead pointing right (rotated concept — pointing down toward linear) */}
-            <path d="M13 61 L20 70 L27 61"
+            <circle cx="20" cy="20" r="3" fill="#d4972a" opacity="0.8" />
+            <circle cx="20" cy="20" r="6" fill="#d4972a" opacity="0.12" />
+            {/* Arrow shaft pointing right */}
+            <line x1="24" y1="20" x2="46" y2="20" stroke="#d4972a" strokeWidth="1.5" />
+            {/* Arrowhead pointing right */}
+            <path d="M39 13 L48 20 L39 27"
               stroke="#d4972a" strokeWidth="1.5" fill="none"
               strokeLinecap="round" strokeLinejoin="round" />
           </svg>
