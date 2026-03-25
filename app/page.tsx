@@ -1231,32 +1231,61 @@ function FeatureVisual({ index }: { index: number }) {
     );
   }
 
-  // Data product — live distribution
+  // Live consensus — Bloomberg-terminal style price card
   return (
-    <div style={{ background: "#111", borderRadius: 20, padding: "2.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
+    <div style={{ background: "#111", borderRadius: 20, padding: "1.75rem 2rem 1.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
+      {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
-        <span style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888" }}>LIVE DISTRIBUTION</span>
-        <span style={{ fontFamily: sans, fontSize: 12, color: "#2aad6e" }}>● STREAMING</span>
+        <span style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888" }}>LIVE CONSENSUS</span>
+        <span style={{ fontFamily: sans, fontSize: 11, color: "#2aad6e", fontWeight: 600, display: "flex", alignItems: "center", gap: 5 }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#2aad6e", display: "inline-block", boxShadow: "0 0 6px rgba(42,173,110,0.7)" }} />
+          STREAMING
+        </span>
       </div>
-      <svg viewBox="0 0 260 80" style={{ width: "100%", height: 110 }}>
-        {/* Animated bars */}
-        {Array.from({ length: 20 }).map((_, i) => {
-          const h = Math.exp(-Math.pow((i - 10) / 4, 2)) * 65 + 5;
-          return (
-            <rect key={i} x={i * 13 + 1} y={80 - h} width={10} height={h} rx={2}
-              fill={i >= 8 && i <= 12 ? "#d4972a" : "#333"} opacity={i >= 8 && i <= 12 ? 0.9 : 0.4}>
-              <animate attributeName="height" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite"
-                values={`${h};${h * 0.85};${h}`} />
-              <animate attributeName="y" dur={`${1.5 + i * 0.1}s`} repeatCount="indefinite"
-                values={`${80 - h};${80 - h * 0.85};${80 - h}`} />
-            </rect>
-          );
-        })}
+      {/* Mid price + change */}
+      <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: "0.25rem" }}>
+        <span style={{ fontFamily: sans, fontSize: 38, fontWeight: 800, color: "#d4972a", letterSpacing: "-0.03em", lineHeight: 1 }}>$153.4B</span>
+        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#2aad6e" }}>↑ +$1.9B this week</span>
+      </div>
+      <div style={{ fontFamily: sans, fontSize: 10, color: "#444", marginBottom: "1.1rem", letterSpacing: "0.02em" }}>
+        last trade: 2 min ago
+      </div>
+      {/* Sparkline — 14 daily closes drifting $151.5B → $153.4B */}
+      <svg viewBox="0 0 280 55" style={{ width: "100%", height: "auto", display: "block", marginBottom: "0.5rem", overflow: "visible" }}>
+        <defs>
+          <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor="#d4972a" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#d4972a" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* Fill */}
+        <path d="M 0,39.8 L 21.5,44.5 43,36.7 64.5,32.1 86,35.6 L 107.5,29.1 129,32.6 150.5,24.9 172,22.3 L 193.5,26.8 215,21.4 236.5,18.4 258,19.8 279.5,16.9 L 279.5,55 L 0,55 Z" fill="url(#sparkGrad)" />
+        {/* Line */}
+        <polyline points="0,39.8 21.5,44.5 43,36.7 64.5,32.1 86,35.6 107.5,29.1 129,32.6 150.5,24.9 172,22.3 193.5,26.8 215,21.4 236.5,18.4 258,19.8 279.5,16.9"
+          fill="none" stroke="#d4972a" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Current dot */}
+        <circle cx="279.5" cy="16.9" r="3.5" fill="#d4972a" />
+        <circle cx="279.5" cy="16.9" r="7"   fill="#d4972a" fillOpacity="0.15" />
+        {/* Time labels */}
+        <text x="0"     y="53" fill="#3a3a3a" fontSize="7.5" fontFamily="Inter, sans-serif">14d ago</text>
+        <text x="279.5" y="53" fill="#3a3a3a" fontSize="7.5" fontFamily="Inter, sans-serif" textAnchor="end">now</text>
       </svg>
-      <div style={{ display: "flex", justifyContent: "space-between", fontFamily: sans, fontSize: 11, color: "#555", marginTop: "0.5rem" }}>
-        <span>4.20%</span>
-        <span style={{ color: "#d4972a", fontWeight: 600 }}>Consensus: 4.42%</span>
-        <span>4.60%</span>
+      {/* Bid / Ask */}
+      <div style={{ display: "flex", gap: 8, marginBottom: "1rem" }}>
+        <div style={{ flex: 1, background: "#0d1a0f", border: "1px solid rgba(42,173,110,0.2)", borderRadius: 8, padding: "8px 12px" }}>
+          <div style={{ fontFamily: sans, fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "#2aad6e", opacity: 0.7, marginBottom: 3 }}>BID</div>
+          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#2aad6e", letterSpacing: "-0.02em" }}>$152.8B</div>
+        </div>
+        <div style={{ flex: 1, background: "#1a0d0d", border: "1px solid rgba(192,57,43,0.2)", borderRadius: 8, padding: "8px 12px" }}>
+          <div style={{ fontFamily: sans, fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "#c0392b", opacity: 0.7, marginBottom: 3 }}>ASK</div>
+          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#c0392b", letterSpacing: "-0.02em" }}>$153.9B</div>
+        </div>
+      </div>
+      {/* Footer */}
+      <div style={{ height: 1, background: "#1e1e1e", margin: "0 0 0.75rem" }} />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#ccc", letterSpacing: "-0.01em" }}>NVDA 2026 Revenue</span>
+        <span style={{ fontFamily: sans, fontSize: 9, color: "#333", letterSpacing: "0.02em" }}>updated on every trade</span>
       </div>
     </div>
   );
