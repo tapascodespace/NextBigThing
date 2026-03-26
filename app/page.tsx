@@ -180,7 +180,7 @@ function LinearPayoffChart() {
           Linear Payoff
         </span>
         <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase" as const, color: "#666", background: "#1a1a1a", padding: "4px 10px", borderRadius: 4 }}>
-          NVDA Q2 2026 Revenue
+          NVDA 2026 Revenue
         </span>
       </div>
 
@@ -496,7 +496,7 @@ function Nav() {
 /* ───────── TICKER ───────── */
 const tickerItems = [
   { label: "Fed Rate Dec 15", value: "4.42%", positive: true },
-  { label: "NVDA Q2 Revenue", value: "$31.2B", positive: true },
+  { label: "NVDA 2027 Revenue", value: "$350B", positive: true },
   { label: "Arsenal Goal Diff", value: "+2.1", positive: true },
   { label: "UK GDP Q3", value: "0.31%", positive: true },
   { label: "Man City Goals/Game", value: "1.8", positive: false },
@@ -883,7 +883,7 @@ const featureBlocks = [
     num: "04",
     label: "HOW IT PAYS",
     title: "THE NUMBER IS YOUR PAYOFF",
-    desc: "The market prices NVIDIA Q2 revenue at $31.2B. You think $31.8B, so you buy. \nRevenue prints $31.6B. Every dollar above your entry, you profit.",
+    desc: "The market prices NVIDIA 2027 revenue at $350B. You think $400B, so you buy. \nRevenue prints $370B. Every dollar above your entry, you profit.",
     highlight: "Right by a little, make a little. Right by a lot, make a lot. \nNo asymmetry. Your edge is your reward.",
     side: "right" as const,
   },
