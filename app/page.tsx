@@ -54,6 +54,11 @@ const slowTransition = {
 
 /* ===================================================================
    BINARY PAYOFF CHART — Section 01 graphic
+   X-axis: $300B to $420B (120B range), chart area x: 80→504 (424px)
+   Strike at $350B: x = 80 + (50/120)*424 = 257
+   Trader A at $370B: x = 80 + (70/120)*424 = 327
+   Trader B at $400B: x = 80 + (100/120)*424 = 433
+   Actual at $370B: x = 327
    =================================================================== */
 function BinaryPayoffChart() {
   return (
@@ -71,7 +76,7 @@ function BinaryPayoffChart() {
           Binary Payoff
         </span>
         <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase" as const, color: "#666", background: "#1a1a1a", padding: "4px 10px", borderRadius: 4 }}>
-          NVDA 2026 Revenue Beats $150B?
+          NVDA 2027 Revenue Beats $350B?
         </span>
       </div>
 
@@ -92,62 +97,62 @@ function BinaryPayoffChart() {
           <text x={68} y={234} fill="#555" fontSize={16} fontFamily={sans} textAnchor="end">-$0.50</text>
 
           {/* Loss zone shading */}
-          <rect x={80} y={130} width={141} height={100} fill="#3d1515" opacity={0.3}/>
+          <rect x={80} y={130} width={177} height={100} fill="#3d1515" opacity={0.3}/>
           {/* Win zone shading */}
-          <rect x={221} y={30} width={283} height={100} fill="#1a3d1a" opacity={0.3}/>
+          <rect x={257} y={30} width={247} height={100} fill="#1a3d1a" opacity={0.3}/>
 
           {/* Step function: flat loss → jump at strike → flat win */}
-          <line x1={80} y1={230} x2={221} y2={230} stroke="#ef4444" strokeWidth={2.5}/>
-          <line x1={221} y1={230} x2={221} y2={30} stroke="#888" strokeWidth={1} strokeDasharray="4,4"/>
-          <line x1={221} y1={30} x2={504} y2={30} stroke="#22c55e" strokeWidth={2.5}/>
+          <line x1={80} y1={230} x2={257} y2={230} stroke="#ef4444" strokeWidth={2.5}/>
+          <line x1={257} y1={230} x2={257} y2={30} stroke="#888" strokeWidth={1} strokeDasharray="4,4"/>
+          <line x1={257} y1={30} x2={504} y2={30} stroke="#22c55e" strokeWidth={2.5}/>
 
           {/* Strike label */}
-          <text x={221} y={256} fill="#888" fontSize={15} fontFamily={sans} textAnchor="middle">$150B</text>
-          <text x={221} y={273} fill="#555" fontSize={14} fontFamily={sans} textAnchor="middle">STRIKE</text>
+          <text x={257} y={256} fill="#888" fontSize={15} fontFamily={sans} textAnchor="middle">$350B</text>
+          <text x={257} y={273} fill="#555" fontSize={14} fontFamily={sans} textAnchor="middle">STRIKE</text>
 
           {/* X-axis range labels */}
-          <text x={80} y={256} fill="#555" fontSize={15} fontFamily={sans} textAnchor="start">$130B</text>
-          <text x={504} y={256} fill="#555" fontSize={15} fontFamily={sans} textAnchor="end">$190B</text>
+          <text x={80} y={256} fill="#555" fontSize={15} fontFamily={sans} textAnchor="start">$300B</text>
+          <text x={504} y={256} fill="#555" fontSize={15} fontFamily={sans} textAnchor="end">$420B</text>
 
           {/* X-axis base line */}
           <line x1={80} y1={240} x2={504} y2={240} stroke="#333" strokeWidth={1}/>
 
           {/* X-axis title */}
-          <text x={370} y={273} fill="#444" fontSize={13} fontFamily={sans} fontWeight={500} textAnchor="middle">NVIDIA 2026 Revenue</text>
+          <text x={370} y={273} fill="#444" fontSize={13} fontFamily={sans} fontWeight={500} textAnchor="middle">NVIDIA 2027 Revenue</text>
 
-          {/* Trader A marker at $153B */}
-          <line x1={243} y1={30} x2={243} y2={48} stroke="#d4a843" strokeWidth={1.5}/>
-          <circle cx={243} cy={30} r={5} fill="#d4a843"/>
-          <rect x={207} y={51} width={72} height={24} rx={4} fill="#d4a843" opacity={0.15}/>
-          <text x={243} y={68} fill="#d4a843" fontSize={15} fontFamily={sans} fontWeight={600} textAnchor="middle">Trader A</text>
-          <text x={243} y={84} fill="#d4a843" fontSize={14} fontFamily={sans} textAnchor="middle">$153B</text>
+          {/* Trader A marker at $370B → x=327 */}
+          <line x1={327} y1={30} x2={327} y2={48} stroke="#d4a843" strokeWidth={1.5}/>
+          <circle cx={327} cy={30} r={5} fill="#d4a843"/>
+          <rect x={291} y={51} width={72} height={24} rx={4} fill="#d4a843" opacity={0.15}/>
+          <text x={327} y={68} fill="#d4a843" fontSize={15} fontFamily={sans} fontWeight={600} textAnchor="middle">Trader A</text>
+          <text x={327} y={84} fill="#d4a843" fontSize={14} fontFamily={sans} textAnchor="middle">$370B</text>
 
-          {/* Trader B marker at $180B */}
+          {/* Trader B marker at $400B → x=433 */}
           <line x1={433} y1={30} x2={433} y2={48} stroke="#ef4444" strokeWidth={1.5}/>
           <circle cx={433} cy={30} r={5} fill="#ef4444"/>
           <rect x={397} y={51} width={72} height={24} rx={4} fill="#ef4444" opacity={0.15}/>
           <text x={433} y={68} fill="#ef4444" fontSize={15} fontFamily={sans} fontWeight={600} textAnchor="middle">Trader B</text>
-          <text x={433} y={84} fill="#ef4444" fontSize={14} fontFamily={sans} textAnchor="middle">$180B</text>
+          <text x={433} y={84} fill="#ef4444" fontSize={14} fontFamily={sans} textAnchor="middle">$400B</text>
 
           {/* Same payout bracket */}
-          <line x1={243} y1={23} x2={433} y2={23} stroke="#555" strokeWidth={1}/>
-          <line x1={243} y1={20} x2={243} y2={26} stroke="#555" strokeWidth={1}/>
+          <line x1={327} y1={23} x2={433} y2={23} stroke="#555" strokeWidth={1}/>
+          <line x1={327} y1={20} x2={327} y2={26} stroke="#555" strokeWidth={1}/>
           <line x1={433} y1={20} x2={433} y2={26} stroke="#555" strokeWidth={1}/>
-          <text x={338} y={17} fill="#666" fontSize={14} fontFamily={sans} fontWeight={500} textAnchor="middle">SAME PAYOUT</text>
+          <text x={380} y={17} fill="#666" fontSize={14} fontFamily={sans} fontWeight={500} textAnchor="middle">SAME PAYOUT</text>
 
-          {/* Actual revenue marker at $153.5B */}
-          <line x1={246} y1={92} x2={246} y2={108} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3"/>
-          <text x={246} y={122} fill="#fff" fontSize={13} fontFamily={sans} fontWeight={500} textAnchor="middle" opacity={0.6}>Actual: $153.5B</text>
+          {/* Actual revenue marker at $370B → x=327 */}
+          <line x1={330} y1={92} x2={330} y2={108} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3"/>
+          <text x={330} y={122} fill="#fff" fontSize={13} fontFamily={sans} fontWeight={500} textAnchor="middle" opacity={0.6}>Actual: $370B</text>
         </svg>
       </div>
 
       {/* Callout */}
       <div style={{ borderLeft: "3px solid #d4a843", paddingLeft: 16, marginTop: 8 }}>
         <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6 }}>
-          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader A: $153B</strong> (nailed it)
+          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader A: $370B</strong> (nailed it)
         </div>
         <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6 }}>
-          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader B: $180B</strong> ($27B off)
+          <strong style={{ color: "#fff", fontWeight: 600 }}>Trader B: $400B</strong> ($30B off)
         </div>
         <div style={{ fontFamily: sans, color: "#999", fontSize: 13, lineHeight: 1.6, marginTop: 4 }}>
           Both paid exactly <strong style={{ color: "#fff", fontWeight: 600 }}>+$0.50</strong>.
@@ -163,6 +168,13 @@ function BinaryPayoffChart() {
 /* ===================================================================
    LINEAR PAYOFF CHART — Section 02 graphic
    Uses IG/CME-style P&L breakdown: (Settlement - Entry) × Contracts
+   Entry: $350B, Settlement: $370B, Contracts: 100
+   P&L = ($370B - $350B) × 100 = +$2,000
+   X-axis: $310B to $390B (80B range), chart area x: 80→504 (424px)
+   Entry $350B: x = 80 + (40/80)*424 = 292
+   Settlement $370B: x = 80 + (60/80)*424 = 398
+   Y-axis: -$4,000 to +$4,000
+   P&L at settlement: +$2,000 → y = 125 - (2000/4000)*100 = 75
    =================================================================== */
 function LinearPayoffChart() {
   return (
@@ -180,15 +192,15 @@ function LinearPayoffChart() {
           Linear Payoff
         </span>
         <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 500, letterSpacing: "1px", textTransform: "uppercase" as const, color: "#666", background: "#1a1a1a", padding: "4px 10px", borderRadius: 4 }}>
-          NVDA 2026 Revenue
+          NVDA 2027 Revenue
         </span>
       </div>
 
       {/* Stats row */}
       <div style={{ display: "flex", gap: 24, marginBottom: "1.25rem", padding: "14px 16px", background: "#1a1a1a", borderRadius: 10 }}>
         {[
-          { label: "ENTRY", value: "$150.0B", color: "#fff" },
-          { label: "SETTLEMENT", value: "$153.5B", color: "#fff" },
+          { label: "ENTRY", value: "$350.0B", color: "#fff" },
+          { label: "SETTLEMENT", value: "$370.0B", color: "#fff" },
           { label: "CONTRACTS", value: "100", color: "#fff" },
         ].map((stat) => (
           <div key={stat.label} style={{ display: "flex", flexDirection: "column" as const, gap: 3 }}>
@@ -202,14 +214,14 @@ function LinearPayoffChart() {
       <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, flexWrap: "wrap" as const }}>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>(</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$153.5B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$370.0B</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>-</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$150.0B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$350.0B</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>)</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
           <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
-          <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$350</span>
+          <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$2,000</span>
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 4 }}>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
@@ -221,19 +233,19 @@ function LinearPayoffChart() {
       </div>
 
       {/* SVG Chart
-        X-axis: $140B to $165B (25B range)
-        Y-axis: -$1,000 to +$1,000
+        X-axis: $310B to $390B (80B range)
+        Y-axis: -$4,000 to +$4,000
         100 contracts, $1 per $1B per contract = $100 per $1B
         Chart area: x 80→504 (424px), y 25→225 (200px)
-        Entry $150B: x=250, y=125 ($0)
-        Settlement $153.5B: x=309, y=125-(350/1000)*100=90
+        Entry $350B: x=292, y=125 ($0)
+        Settlement $370B: x=398, y=75 (+$2,000)
       */}
       <div style={{ position: "relative", width: "100%", height: 260 }}>
         <svg viewBox="0 0 540 260" style={{ width: "100%", height: "100%" }}>
           {/* P&L label rotated */}
           <text x={14} y={125} fill="#555" fontSize={15} fontFamily={sans} fontWeight={500} textAnchor="middle" transform="rotate(-90, 14, 125)">P&amp;L</text>
 
-          {/* Grid lines — $500 intervals */}
+          {/* Grid lines — $2,000 intervals */}
           <line x1={80} y1={25} x2={504} y2={25} stroke="#1a1a1a" strokeWidth={1}/>
           <line x1={80} y1={75} x2={504} y2={75} stroke="#1a1a1a" strokeWidth={1}/>
           <line x1={80} y1={125} x2={504} y2={125} stroke="#1a1a1a" strokeWidth={1}/>
@@ -241,63 +253,57 @@ function LinearPayoffChart() {
           <line x1={80} y1={225} x2={504} y2={225} stroke="#1a1a1a" strokeWidth={1}/>
 
           {/* Y-axis labels */}
-          <text x={68} y={29} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$1,000</text>
-          <text x={68} y={79} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$500</text>
+          <text x={68} y={29} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$4,000</text>
+          <text x={68} y={79} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">+$2,000</text>
           <text x={68} y={129} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">$0</text>
-          <text x={68} y={179} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$500</text>
-          <text x={68} y={229} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$1,000</text>
+          <text x={68} y={179} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$2,000</text>
+          <text x={68} y={229} fill="#555" fontSize={14} fontFamily={sans} textAnchor="end">-$4,000</text>
 
           {/* Profit zone shading */}
-          <polygon points="250,125 504,125 504,25" fill="#1a3d1a" opacity={0.2}/>
+          <polygon points="292,125 504,125 504,25" fill="#1a3d1a" opacity={0.2}/>
           {/* Loss zone shading */}
-          <polygon points="250,125 80,125 80,225" fill="#3d1515" opacity={0.2}/>
+          <polygon points="292,125 80,125 80,225" fill="#3d1515" opacity={0.2}/>
 
           {/* Linear P&L line
-            $140B (x=80): P&L = -$1,000 → y=225
-            $150B (x=250): P&L = $0 → y=125
-            $160B (x=419): P&L = +$1,000 → y=25
-            $165B (x=504): P&L = +$1,500 → clipped above
+            $310B (x=80): P&L = -$4,000 → y=225
+            $350B (x=292): P&L = $0 → y=125
+            $390B (x=504): P&L = +$4,000 → y=25
           */}
           {/* Loss segment */}
-          <line x1={80} y1={225} x2={250} y2={125} stroke="#ef4444" strokeWidth={2.5}/>
+          <line x1={80} y1={225} x2={292} y2={125} stroke="#ef4444" strokeWidth={2.5}/>
           {/* Profit segment */}
-          <line x1={250} y1={125} x2={419} y2={25} stroke="#22c55e" strokeWidth={2.5}/>
-          {/* Clipped extension */}
-          <line x1={419} y1={25} x2={504} y2={25} stroke="#22c55e" strokeWidth={1.5} strokeDasharray="4,4" opacity={0.4}/>
+          <line x1={292} y1={125} x2={504} y2={25} stroke="#22c55e" strokeWidth={2.5}/>
 
           {/* Zero line highlight */}
           <line x1={80} y1={125} x2={504} y2={125} stroke="#333" strokeWidth={1.5}/>
 
-          {/* Entry marker at $150B */}
-          <circle cx={250} cy={125} r={5} fill="#ffffff" stroke="#111" strokeWidth={2}/>
-          <line x1={250} y1={125} x2={250} y2={240} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3" opacity={0.3}/>
-          <text x={250} y={250} fill="#fff" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle" opacity={0.8}>$150B</text>
+          {/* Entry marker at $350B → x=292 */}
+          <circle cx={292} cy={125} r={5} fill="#ffffff" stroke="#111" strokeWidth={2}/>
+          <line x1={292} y1={125} x2={292} y2={240} stroke="#ffffff" strokeWidth={1} strokeDasharray="3,3" opacity={0.3}/>
+          <text x={292} y={250} fill="#fff" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle" opacity={0.8}>$350B</text>
 
-          {/* Settlement marker at $153.5B
-            x = 80 + (13.5/25)*424 = 309
-            P&L = +$350 → y = 125 - (350/1000)*100 = 90
-          */}
-          <line x1={309} y1={90} x2={309} y2={240} stroke="#22c55e" strokeWidth={1} strokeDasharray="3,3" opacity={0.4}/>
-          <circle cx={309} cy={90} r={5} fill="#22c55e"/>
-          <text x={309} y={250} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle">$153.5B</text>
+          {/* Settlement marker at $370B → x=398, P&L=+$2,000 → y=75 */}
+          <line x1={398} y1={75} x2={398} y2={240} stroke="#22c55e" strokeWidth={1} strokeDasharray="3,3" opacity={0.4}/>
+          <circle cx={398} cy={75} r={5} fill="#22c55e"/>
+          <text x={398} y={250} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={600} textAnchor="middle">$370B</text>
 
           {/* Horizontal dashed line from settlement to Y-axis */}
-          <line x1={80} y1={90} x2={309} y2={90} stroke="#22c55e" strokeWidth={1} strokeDasharray="4,4" opacity={0.3}/>
+          <line x1={80} y1={75} x2={398} y2={75} stroke="#22c55e" strokeWidth={1} strokeDasharray="4,4" opacity={0.3}/>
 
           {/* P&L annotation at settlement point */}
-          <rect x={315} y={78} width={60} height={24} rx={4} fill="#22c55e" opacity={0.15}/>
-          <text x={345} y={95} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={700} textAnchor="middle">+$350</text>
+          <rect x={404} y={63} width={72} height={24} rx={4} fill="#22c55e" opacity={0.15}/>
+          <text x={440} y={80} fill="#22c55e" fontSize={14} fontFamily={sans} fontWeight={700} textAnchor="middle">+$2,000</text>
 
           {/* X-axis line */}
           <line x1={80} y1={237} x2={504} y2={237} stroke="#333" strokeWidth={1}/>
 
           {/* X-axis range labels */}
-          <text x={80} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="start">$140B</text>
-          <text x={504} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="end">$165B</text>
+          <text x={80} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="start">$310B</text>
+          <text x={504} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="end">$390B</text>
 
           {/* X-axis subtitle labels */}
-          <text x={250} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">ENTRY</text>
-          <text x={309} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">SETTLEMENT</text>
+          <text x={292} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">ENTRY</text>
+          <text x={398} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">SETTLEMENT</text>
         </svg>
       </div>
     </div>
@@ -496,7 +502,7 @@ function Nav() {
 /* ───────── TICKER ───────── */
 const tickerItems = [
   { label: "Fed Rate Dec 15", value: "4.42%", positive: true },
-  { label: "NVDA 2027 Revenue", value: "$350B", positive: true },
+  { label: "NVDA 2027 Revenue", value: "$370.0B", positive: true },
   { label: "Arsenal Goal Diff", value: "+2.1", positive: true },
   { label: "UK GDP Q3", value: "0.31%", positive: true },
   { label: "Man City Goals/Game", value: "1.8", positive: false },
@@ -792,8 +798,8 @@ function AboutUs() {
           </p>
           <div style={{ borderLeft: "3px solid #d4972a", paddingLeft: "1rem" }}>
             <p style={{ fontFamily: sans, fontSize: 17, fontWeight: 600, lineHeight: 1.5, color: "#111" }}>
-              NVIDIA reports $150B in revenue. One trader predicted $151B. Another said $160B. Binary markets paid them both $1. 
-              A $9.0B difference in their forecasts. Zero difference in their reward.
+              NVIDIA reports $370B in revenue. One trader predicted $370B. Another said $400B. Binary markets paid them both $1. 
+              A $30B difference in their forecasts. Zero difference in their reward.
             </p>
           </div>
         </motion.div>
@@ -983,26 +989,26 @@ function FeatureVisual({ index }: { index: number }) {
   if (index === 0) {
     // Single instrument — 20+ binary contracts (left) → 1 linear market (right)
     const binaryContracts = [
-      { strike: ">$130B?", yes: ".96", no: ".04" },
-      { strike: ">$135B?", yes: ".91", no: ".09" },
-      { strike: ">$140B?", yes: ".85", no: ".15" },
-      { strike: ">$142B?", yes: ".80", no: ".20" },
-      { strike: ">$145B?", yes: ".73", no: ".27" },
-      { strike: ">$147B?", yes: ".67", no: ".33" },
-      { strike: ">$148B?", yes: ".63", no: ".37" },
-      { strike: ">$150B?", yes: ".57", no: ".43" },
-      { strike: ">$152B?", yes: ".50", no: ".50" },
-      { strike: ">$155B?", yes: ".40", no: ".60" },
-      { strike: ">$157B?", yes: ".33", no: ".67" },
-      { strike: ">$160B?", yes: ".25", no: ".75" },
-      { strike: ">$162B?", yes: ".19", no: ".81" },
-      { strike: ">$165B?", yes: ".14", no: ".86" },
-      { strike: ">$170B?", yes: ".08", no: ".92" },
-      { strike: ">$175B?", yes: ".04", no: ".96" },
-      { strike: ">$178B?", yes: ".02", no: ".98" },
-      { strike: ">$180B?", yes: ".01", no: ".99" },
-      { strike: ">$185B?", yes: ".01", no: ".99" },
-      { strike: ">$190B?", yes: ".00", no: "1.0" },
+      { strike: ">$300B?", yes: ".96", no: ".04" },
+      { strike: ">$310B?", yes: ".93", no: ".07" },
+      { strike: ">$320B?", yes: ".88", no: ".12" },
+      { strike: ">$325B?", yes: ".84", no: ".16" },
+      { strike: ">$330B?", yes: ".79", no: ".21" },
+      { strike: ">$335B?", yes: ".73", no: ".27" },
+      { strike: ">$340B?", yes: ".67", no: ".33" },
+      { strike: ">$345B?", yes: ".60", no: ".40" },
+      { strike: ">$350B?", yes: ".52", no: ".48" },
+      { strike: ">$355B?", yes: ".44", no: ".56" },
+      { strike: ">$360B?", yes: ".37", no: ".63" },
+      { strike: ">$365B?", yes: ".30", no: ".70" },
+      { strike: ">$370B?", yes: ".24", no: ".76" },
+      { strike: ">$375B?", yes: ".18", no: ".82" },
+      { strike: ">$380B?", yes: ".13", no: ".87" },
+      { strike: ">$390B?", yes: ".07", no: ".93" },
+      { strike: ">$400B?", yes: ".04", no: ".96" },
+      { strike: ">$410B?", yes: ".02", no: ".98" },
+      { strike: ">$420B?", yes: ".01", no: ".99" },
+      { strike: ">$430B?", yes: ".00", no: "1.0" },
     ];
     return (
       <div style={{
@@ -1119,7 +1125,7 @@ function FeatureVisual({ index }: { index: number }) {
               <span style={{
                 fontFamily: sans, fontSize: 11, fontWeight: 700, color: "#fff",
               }}>
-                NVDA 2026 Revenue
+                NVDA 2027 Revenue
               </span>
             </div>
             {/* Bid / Ask */}
@@ -1136,7 +1142,7 @@ function FeatureVisual({ index }: { index: number }) {
                 <div style={{
                   fontFamily: sans, fontSize: 15, fontWeight: 800,
                   color: "#2aad6e", letterSpacing: "-0.02em",
-                }}>$151.2B</div>
+                }}>$349.2B</div>
               </div>
               <div style={{
                 flex: 1, textAlign: "center", padding: "7px 0", borderRadius: 7,
@@ -1150,7 +1156,7 @@ function FeatureVisual({ index }: { index: number }) {
                 <div style={{
                   fontFamily: sans, fontSize: 15, fontWeight: 800,
                   color: "#c0392b", letterSpacing: "-0.02em",
-                }}>$151.8B</div>
+                }}>$350.8B</div>
               </div>
             </div>
             {/* Spread */}
@@ -1181,14 +1187,14 @@ function FeatureVisual({ index }: { index: number }) {
         {/* Entry callout */}
         <div style={{ fontFamily: sans, fontSize: 12, color: "#aaa", marginBottom: "1rem", lineHeight: 1.4 }}>
           {"Entry: "}
-          <span style={{ color: "#d4972a", fontWeight: 700 }}>$150B</span>
-          <span style={{ color: "#555" }}>{" — NVIDIA 2026 Revenue"}</span>
+          <span style={{ color: "#d4972a", fontWeight: 700 }}>$350B</span>
+          <span style={{ color: "#555" }}>{" — NVIDIA 2027 Revenue"}</span>
         </div>
         {/*
           viewBox 0 0 300 195 — Plot x:50→280, y:12→161, zero y=88, entry x=165
+          X-axis: $270B to $430B (160B range)
+          Entry $350B: x = 50 + (80/160)*230 = 165
           Line: bottom-left corner (50,161) → top-right (280,15)
-          Loss triangle (50,161)→(165,88)→(50,88): base=115 height=73
-          Profit triangle (165,88)→(280,15)→(280,88): base=115 height=73  ← equal areas
         */}
         <svg viewBox="0 0 300 195" style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}>
           {/* Zero axis */}
@@ -1212,20 +1218,20 @@ function FeatureVisual({ index }: { index: number }) {
           <text x="0" y="0" transform="translate(12,88) rotate(-90)" fill="#666" fontSize="9" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing="0.06em">P&amp;L</text>
           {/* Y ticks */}
           <line x1="46" y1="15" x2="50" y2="15" stroke="#2aad6e" strokeWidth="1" opacity="0.6" />
-          <text x="44" y="19" fill="#2aad6e" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">+$40</text>
+          <text x="44" y="19" fill="#2aad6e" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">+$80</text>
           <line x1="46" y1="88" x2="50" y2="88" stroke="#555" strokeWidth="1" />
           <text x="44" y="91" fill="#555" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end">0</text>
           <line x1="46" y1="161" x2="50" y2="161" stroke="#c0392b" strokeWidth="1" opacity="0.6" />
-          <text x="44" y="157" fill="#c0392b" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">−$40</text>
+          <text x="44" y="157" fill="#c0392b" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="end" fontWeight="600">−$80</text>
           {/* X-axis */}
           <line x1="50" y1="161" x2="280" y2="161" stroke="#333" strokeWidth="1" />
           <line x1="50"  y1="161" x2="50"  y2="165" stroke="#555"    strokeWidth="1" />
           <line x1="165" y1="161" x2="165" y2="165" stroke="#d4972a" strokeWidth="1" />
           <line x1="280" y1="161" x2="280" y2="165" stroke="#555"    strokeWidth="1" />
-          <text x="50"  y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$110B</text>
-          <text x="165" y="174" fill="#d4972a" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle" fontWeight="700">$150B</text>
-          <text x="280" y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$190B</text>
-          <text x="165" y="188" fill="#555" fontSize="9" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing="0.05em">NVIDIA 2026 Revenue</text>
+          <text x="50"  y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$270B</text>
+          <text x="165" y="174" fill="#d4972a" fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle" fontWeight="700">$350B</text>
+          <text x="280" y="174" fill="#555"    fontSize="8.5" fontFamily="Inter, sans-serif" textAnchor="middle">$430B</text>
+          <text x="165" y="188" fill="#555" fontSize="9" fontFamily="Inter, sans-serif" textAnchor="middle" letterSpacing="0.05em">NVIDIA 2027 Revenue</text>
         </svg>
       </div>
     );
@@ -1244,13 +1250,13 @@ function FeatureVisual({ index }: { index: number }) {
       </div>
       {/* Mid price + change */}
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: "0.25rem" }}>
-        <span style={{ fontFamily: sans, fontSize: 38, fontWeight: 800, color: "#d4972a", letterSpacing: "-0.03em", lineHeight: 1 }}>$153.4B</span>
-        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#2aad6e" }}>↑ +$1.9B this week</span>
+        <span style={{ fontFamily: sans, fontSize: 38, fontWeight: 800, color: "#d4972a", letterSpacing: "-0.03em", lineHeight: 1 }}>$350.0B</span>
+        <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#2aad6e" }}>↑ +$3.8B this week</span>
       </div>
       <div style={{ fontFamily: sans, fontSize: 10, color: "#444", marginBottom: "1.1rem", letterSpacing: "0.02em" }}>
         last trade: 2 min ago
       </div>
-      {/* Sparkline — 14 daily closes drifting $151.5B → $153.4B */}
+      {/* Sparkline — 14 daily closes drifting $346.2B → $350.0B */}
       <svg viewBox="0 0 280 55" style={{ width: "100%", height: "auto", display: "block", marginBottom: "0.5rem", overflow: "visible" }}>
         <defs>
           <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
@@ -1274,17 +1280,17 @@ function FeatureVisual({ index }: { index: number }) {
       <div style={{ display: "flex", gap: 8, marginBottom: "1rem" }}>
         <div style={{ flex: 1, background: "#0d1a0f", border: "1px solid rgba(42,173,110,0.2)", borderRadius: 8, padding: "8px 12px" }}>
           <div style={{ fontFamily: sans, fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "#2aad6e", opacity: 0.7, marginBottom: 3 }}>BID</div>
-          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#2aad6e", letterSpacing: "-0.02em" }}>$152.8B</div>
+          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#2aad6e", letterSpacing: "-0.02em" }}>$349.2B</div>
         </div>
         <div style={{ flex: 1, background: "#1a0d0d", border: "1px solid rgba(192,57,43,0.2)", borderRadius: 8, padding: "8px 12px" }}>
           <div style={{ fontFamily: sans, fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "#c0392b", opacity: 0.7, marginBottom: 3 }}>ASK</div>
-          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#c0392b", letterSpacing: "-0.02em" }}>$153.9B</div>
+          <div style={{ fontFamily: sans, fontSize: 16, fontWeight: 800, color: "#c0392b", letterSpacing: "-0.02em" }}>$350.8B</div>
         </div>
       </div>
       {/* Footer */}
       <div style={{ height: 1, background: "#1e1e1e", margin: "0 0 0.75rem" }} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#ccc", letterSpacing: "-0.01em" }}>NVDA 2026 Revenue</span>
+        <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#ccc", letterSpacing: "-0.01em" }}>NVDA 2027 Revenue</span>
         <span style={{ fontFamily: sans, fontSize: 9, color: "#333", letterSpacing: "0.02em" }}>updated on every trade</span>
       </div>
     </div>
