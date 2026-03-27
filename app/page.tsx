@@ -311,8 +311,8 @@ function LinearPayoffChart() {
           <text x={504} y={250} fill="#444" fontSize={13} fontFamily={sans} textAnchor="end">$390B</text>
 
           {/* X-axis subtitle labels */}
-          <text x={292} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">ENTRY</text>
-          <text x={398} y={258} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">SETTLEMENT</text>
+          <text x={292} y={270} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">ENTRY</text>
+          <text x={398} y={270} fill="#555" fontSize={11} fontFamily={sans} fontWeight={500} textAnchor="middle">SETTLEMENT</text>
         </svg>
       </div>
     </div>
