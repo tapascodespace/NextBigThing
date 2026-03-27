@@ -213,10 +213,10 @@ function LinearPayoffChart() {
       {/* P&L formula breakdown — IG/CME style */}
       <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          {/* MOVE column */}
+          {/* DIFFERENCE column */}
           <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
             <span style={{ fontFamily: sans, fontSize: 13, color: "#888", whiteSpace: "nowrap" as const }}>(<span style={{ fontWeight: 700, color: "#fff" }}> $370.0 </span>-<span style={{ fontWeight: 700, color: "#fff" }}> $350.0 </span>)</span>
-            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>DIFFERENCE</span>
           </div>
           {/* × operator with phantom label to match row height */}
           <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
