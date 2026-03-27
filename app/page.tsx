@@ -1312,16 +1312,9 @@ function FeatureVisual({ index }: { index: number }) {
 /* ───────── WHO IT'S FOR ───────── */
 const personas = [
   {
-    icon: "⚽",
-    title: "Sports Bettors",
-    subtitle: "& Sharps",
-    body: "You already think in magnitudes: point spreads, goal differences, total points. Reeshaw gives you one clean market with a proportional payoff. \nWin by one, make a little. Win by four, make four times as much.",
-    tag: "PROPORTIONAL PAYOFF",
-  },
-  {
     icon: "📈",
-    title: "Fundamental",
-    subtitle: "Hedge Funds",
+    title: "Fundamental Investors",
+    subtitle: "& Stock Traders",
     body: "You're edge is the estimate, not the stock. Trade directly on revenue, EPS, and free cash flow without the basis risk, factor noise, or macro drift that comes with equities.\n P&L that moves with your fundamental view, nothing else.",
     tag: "PURE FUNDAMENTAL EXPOSURE",
   },
@@ -1338,6 +1331,13 @@ const personas = [
     subtitle: "& Equity Research",
     body: "Sell-side estimates cluster around consensus. The herd sets the number. \nReeshaw's estimate is set by participants with real capital behind it: a number from people whose only incentive is being right.",
     tag: "PRICED BY CONVICTION",
+  },
+  {
+    icon: "⚽",
+    title: "Sports Bettors",
+    subtitle: "& Sharps",
+    body: "You already think in magnitudes: point spreads, goal differences, total points. Reeshaw gives you one clean market with a proportional payoff. \nWin by one, make a little. Win by four, make four times as much.",
+    tag: "PROPORTIONAL PAYOFF",
   },
 ];
 
