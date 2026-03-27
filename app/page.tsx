@@ -197,13 +197,13 @@ function LinearPayoffChart() {
       </div>
 
       {/* Stats row */}
-      <div style={{ display: "flex", gap: 24, marginBottom: "1.25rem", padding: "14px 16px", background: "#1a1a1a", borderRadius: 10 }}>
+      <div style={{ display: "flex", justifyContent: "space-evenly", marginBottom: "1.25rem", padding: "14px 16px", background: "#1a1a1a", borderRadius: 10 }}>
         {[
           { label: "ENTRY", value: "$350.0B", color: "#fff" },
           { label: "SETTLEMENT", value: "$370.0B", color: "#fff" },
           { label: "CONTRACTS", value: "100", color: "#fff" },
         ].map((stat) => (
-          <div key={stat.label} style={{ display: "flex", flexDirection: "column" as const, gap: 3 }}>
+          <div key={stat.label} style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 3 }}>
             <span style={{ fontFamily: sans, fontSize: 9, fontWeight: 600, letterSpacing: "1.2px", color: "#555" }}>{stat.label}</span>
             <span style={{ fontFamily: sans, fontSize: 16, fontWeight: 700, color: stat.color }}>{stat.value}</span>
           </div>
@@ -212,27 +212,32 @@ function LinearPayoffChart() {
 
       {/* P&L formula breakdown — IG/CME style */}
       <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, flexWrap: "wrap" as const }}>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>(</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$370.0</span>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>-</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$350.0</span>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>)</span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
+          {/* MOVE column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>
+              (<span style={{ fontWeight: 700, color: "#fff" }}> $370.0 </span>-<span style={{ fontWeight: 700, color: "#fff" }}> $350.0 </span>)
+            </span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
+          </div>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>1%</span>
+          {/* MULTIPLIER column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>1%</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MULTIPLIER</span>
+          </div>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
+          {/* CONTRACTS column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
+          </div>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
-          <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$2,000</span>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 4 }}>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MULTIPLIER</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
+          {/* P&L column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$2,000</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
+          </div>
         </div>
       </div>
 
