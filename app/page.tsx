@@ -212,23 +212,32 @@ function LinearPayoffChart() {
 
       {/* P&L formula breakdown — IG/CME style */}
       <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
-        {/* Values row */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#888", whiteSpace: "nowrap" as const }}>
-            (<span style={{ fontWeight: 700, color: "#fff" }}> $370.0 </span>-<span style={{ fontWeight: 700, color: "#fff" }}> $350.0 </span>)
-          </span>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
-          <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
-          <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$2,000</span>
-        </div>
-        {/* Labels row — each label centered under its value */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", marginTop: 5 }}>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
-          <span style={{ fontSize: 9, color: "transparent" }}>&times;</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
-          <span style={{ fontSize: 9, color: "transparent" }}>=</span>
-          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+          {/* MOVE column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, color: "#888", whiteSpace: "nowrap" as const }}>(<span style={{ fontWeight: 700, color: "#fff" }}> $370.0 </span>-<span style={{ fontWeight: 700, color: "#fff" }}> $350.0 </span>)</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
+          </div>
+          {/* × operator with phantom label to match row height */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
+            <span style={{ fontSize: 9, color: "transparent" }}>·</span>
+          </div>
+          {/* CONTRACTS column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
+          </div>
+          {/* = operator with phantom label */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
+            <span style={{ fontSize: 9, color: "transparent" }}>·</span>
+          </div>
+          {/* P&L column */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
+            <span style={{ fontFamily: sans, fontSize: 15, fontWeight: 700, color: "#22c55e" }}>+$2,000</span>
+            <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
+          </div>
         </div>
       </div>
 
