@@ -214,10 +214,12 @@ function LinearPayoffChart() {
       <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, flexWrap: "wrap" as const }}>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>(</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$370.0B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$370.0</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>-</span>
-          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$350.0B</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>$350.0</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#888" }}>)</span>
+          <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
+          <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>1%</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>&times;</span>
           <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 700, color: "#fff" }}>100</span>
           <span style={{ fontFamily: sans, fontSize: 13, color: "#555" }}>=</span>
@@ -226,6 +228,8 @@ function LinearPayoffChart() {
         <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 4 }}>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MOVE</span>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>MULTIPLIER</span>
+          <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;</span>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>CONTRACTS</span>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#333" }}>&nbsp;&nbsp;</span>
           <span style={{ fontFamily: sans, fontSize: 9, color: "#555", letterSpacing: "0.5px" }}>P&amp;L</span>
