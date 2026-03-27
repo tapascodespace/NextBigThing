@@ -1085,7 +1085,7 @@ function FeatureVisual({ index }: { index: number }) {
             fontFamily: sans, fontSize: 8, color: "#444",
             textAlign: "center", lineHeight: 1.4,
           }}>
-            <span style={{ color: "#c0392b", fontWeight: 600 }}>20 markets</span>
+            <span style={{ color: "#c0392b", fontWeight: 600 }}>20+ markets</span>
             {" · 20+ bid/asks · fragmented liquidity"}
           </div>
         </div>
