@@ -62,7 +62,7 @@ const slowTransition = {
    =================================================================== */
 function BinaryPayoffChart() {
   return (
-    <div style={{
+    <div className="feature-card" style={{
       background: "#111",
       borderRadius: 20,
       padding: "2.5rem 3rem 2.25rem",
@@ -178,7 +178,7 @@ function BinaryPayoffChart() {
    =================================================================== */
 function LinearPayoffChart() {
   return (
-    <div style={{
+    <div className="feature-card" style={{
       background: "#111",
       borderRadius: 20,
       padding: "2.5rem 2.5rem 2rem",
@@ -211,8 +211,8 @@ function LinearPayoffChart() {
       </div>
 
       {/* P&L formula breakdown — IG/CME style */}
-      <div style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+      <div className="formula-box" style={{ marginBottom: "1.25rem", padding: "12px 16px", background: "rgba(34, 197, 94, 0.06)", border: "1px solid rgba(34, 197, 94, 0.15)", borderRadius: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" as const }}>
           {/* DIFFERENCE column */}
           <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 4 }}>
             <span style={{ fontFamily: sans, fontSize: 13, color: "#888", whiteSpace: "nowrap" as const }}>(<span style={{ fontWeight: 700, color: "#fff" }}> $370.0 </span>-<span style={{ fontWeight: 700, color: "#fff" }}> $350.0 </span>)</span>
@@ -328,6 +328,11 @@ export default function Home() {
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
+
+    // Disable Lenis on mobile — native iOS scroll is smoother than JS-hijacked scroll
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -451,6 +456,7 @@ function Nav() {
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <a
           href="#cta"
+          className="nav-cta"
           style={{
             fontSize: 14,
             fontFamily: sans,
@@ -524,6 +530,7 @@ const tickerItems = [
 function Ticker() {
   return (
     <div
+      className="ticker-strip"
       style={{
         marginTop: 65,
         borderBottom: "1px solid #1e1e1e",
@@ -643,6 +650,7 @@ function Hero() {
 
   return (
     <section
+      className="hero-section"
       style={{
         position: "relative",
         minHeight: "100vh",
@@ -730,6 +738,7 @@ function Hero() {
         {/* CTA button */}
         <a
           href="#cta"
+          className="hero-cta"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -1020,7 +1029,7 @@ function FeatureVisual({ index }: { index: number }) {
       { strike: ">$430B?", yes: ".00", no: "1.0" },
     ];
     return (
-      <div style={{
+      <div className="feature-card" style={{
         background: "#111",
         borderRadius: 20,
         padding: "1.5rem",
@@ -1033,7 +1042,7 @@ function FeatureVisual({ index }: { index: number }) {
         gap: "1rem",
       }}>
         {/* ── LEFT: Binary contracts ── */}
-        <div style={{ flex: "0 0 auto", width: 185 }}>
+        <div className="binary-contracts-panel" style={{ flex: "0 0 auto", width: 185 }}>
           <div style={{
             fontFamily: sans, fontSize: 9, fontWeight: 700,
             letterSpacing: "0.1em", color: "#c0392b",
@@ -1091,7 +1100,7 @@ function FeatureVisual({ index }: { index: number }) {
         </div>
 
         {/* ── CENTRE: Arrow pointing right ── */}
-        <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center" }}>
+        <div className="converge-arrow" style={{ flex: "0 0 auto", display: "flex", alignItems: "center" }}>
           <svg viewBox="0 0 54 40" fill="none" style={{ width: 54, height: 40 }}>
             {/* Lines converging from left toward the glow point */}
             <line x1="0" y1="4"  x2="20" y2="20" stroke="#444" strokeWidth="0.7" opacity="0.5" />
@@ -1188,7 +1197,7 @@ function FeatureVisual({ index }: { index: number }) {
   if (index === 1) {
     // Linear payoff diagram — THE product visual
     return (
-      <div style={{ background: "#111", borderRadius: 20, padding: "2rem 2rem 1.75rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
+      <div className="feature-card" style={{ background: "#111", borderRadius: 20, padding: "2rem 2rem 1.75rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
         {/* Header */}
         <div style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888", marginBottom: "0.6rem" }}>
           PAYOFF CURVE
@@ -1248,7 +1257,7 @@ function FeatureVisual({ index }: { index: number }) {
 
   // Live consensus — Bloomberg-terminal style price card
   return (
-    <div style={{ background: "#111", borderRadius: 20, padding: "1.75rem 2rem 1.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
+    <div className="feature-card" style={{ background: "#111", borderRadius: 20, padding: "1.75rem 2rem 1.5rem", width: "100%", maxWidth: 420, boxShadow: "0 24px 80px rgba(0,0,0,0.25)" }}>
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
         <span style={{ fontFamily: sans, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#888" }}>LIVE CONSENSUS</span>
@@ -1259,7 +1268,7 @@ function FeatureVisual({ index }: { index: number }) {
       </div>
       {/* Mid price + change */}
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: "0.25rem" }}>
-        <span style={{ fontFamily: sans, fontSize: 38, fontWeight: 800, color: "#d4972a", letterSpacing: "-0.03em", lineHeight: 1 }}>$350.0B</span>
+        <span className="consensus-price" style={{ fontFamily: sans, fontSize: 38, fontWeight: 800, color: "#d4972a", letterSpacing: "-0.03em", lineHeight: 1 }}>$350.0B</span>
         <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 600, color: "#2aad6e" }}>↑ +$3.8B this week</span>
       </div>
       <div style={{ fontFamily: sans, fontSize: 10, color: "#444", marginBottom: "1.1rem", letterSpacing: "0.02em" }}>
@@ -1353,6 +1362,7 @@ function PersonaCard({ icon, title, subtitle, body, tag }: typeof personas[0]) {
         borderWidth={3}
       />
       <div
+        className="persona-card-inner"
         style={{
           position: "relative",
           background: "#0a0a0a",
@@ -1399,6 +1409,7 @@ function PersonaCard({ icon, title, subtitle, body, tag }: typeof personas[0]) {
 function WhoItsFor() {
   return (
     <section
+      className="persona-section"
       style={{ padding: "8rem 4rem", maxWidth: 1200, margin: "0 auto" }}
     >
       <motion.div
@@ -1482,6 +1493,7 @@ function CTA() {
       viewport={{ once: true, amount: 0.3 }}
       transition={slowTransition}
       id="cta"
+      className="cta-section"
       style={{
         padding: "10rem 2rem",
         textAlign: "center",
@@ -1505,6 +1517,7 @@ function CTA() {
 
       <form
         onSubmit={handleSubmit}
+        className="cta-form"
         style={{
           display: "flex",
           gap: 0,

@@ -15,6 +15,13 @@ export const metadata: Metadata = {
     "The first prediction market that prices magnitude, not just direction. Trade the actual outcome, not just whether it happens.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover" as const,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

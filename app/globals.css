@@ -32,6 +32,13 @@ html.lenis, html.lenis body {
   overscroll-behavior: contain;
 }
 
+/* On mobile (no Lenis), ensure no overscroll blocking */
+@media (max-width: 768px) {
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: auto !important;
+  }
+}
+
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -102,6 +109,9 @@ a {
   }
   .about-grid {
     grid-template-columns: 1fr !important;
+    direction: ltr !important;
+    padding: 5rem 2.5rem !important;
+    gap: 2.5rem !important;
   }
   .distribution-grid {
     grid-template-columns: 1fr !important;
@@ -118,31 +128,329 @@ a {
   }
 }
 
-/* Mobile */
-@media (max-width: 767px) {
-  .hero-animation {
-    display: none !important;
+/* ══════════════════════════════════════════════════════════════
+   MOBILE — max-width: 768px
+   All fixes scoped here to ensure zero desktop impact.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Fix 2: Global overflow guard ── */
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
-  .hero-text {
-    max-width: 100% !important;
-    padding: 7rem 1.5rem 3rem !important;
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* ── Fix 3: Navigation ── */
+  nav {
+    padding: 12px 20px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
   }
   .nav-links {
     display: none !important;
   }
+  .nav-cta {
+    font-size: 13px !important;
+    padding: 8px 16px !important;
+  }
+
+  /* ── Fix 4: Ticker ── */
+  .ticker-strip {
+    font-size: 12px !important;
+    padding: 8px 0 !important;
+    margin-top: 52px !important;
+  }
+  .ticker-strip span {
+    padding: 0 16px !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* ── Fix 5: Hero section ── */
+  .hero-animation {
+    display: none !important;
+  }
+  /* Fix iOS 100vh — use dvh so hero doesn't extend behind address bar */
+  .hero-section {
+    min-height: 100dvh !important;
+    min-height: -webkit-fill-available !important;
+  }
+  .hero-text {
+    max-width: 100% !important;
+    padding: 60px 20px 48px !important;
+    text-align: center !important;
+  }
+  .hero-text h1 {
+    font-size: clamp(32px, 8vw, 52px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+  }
+  /* Keep the animated word container functional — don't flatten to inline */
+  .hero-cta {
+    margin-top: 28px !important;
+    font-size: 16px !important;
+    padding: 14px 28px !important;
+    min-height: 44px !important;
+  }
+
+  /* ── Fix 6: Section labels (/// 01 THE PROBLEM etc.) ── */
+  .about-grid span[style*="letterSpacing"],
+  section span[style*="letterSpacing"] {
+    font-size: 12px !important;
+    letter-spacing: 0.12em !important;
+    display: block !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* ── Fix 7: Section headings & body text ── */
+  section h2,
+  .about-grid h2 {
+    font-size: clamp(24px, 6.5vw, 40px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.015em !important;
+  }
+  .about-grid p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── Fix 7 continued: About / Feature grid layout ── */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    direction: ltr !important;
+    padding: 48px 20px !important;
+    gap: 24px !important;
+  }
+
+  /* ── Fix 8 & 11: Charts (Binary Payoff, Linear Payoff, Payoff Curve) ── */
+  .feature-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    margin: 0 auto !important;
+  }
+  .feature-card svg {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+  /* Center feature card wrappers within the about-grid */
+  .about-grid > div {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  /* ── Fix 9: Formula / calculation box ── */
+  .formula-box {
+    padding: 12px !important;
+  }
+  .formula-box > div {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+
+  /* ── Fix 10: Binary vs Linear comparison (Section 03) ── */
+  .feature-card {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+  .binary-contracts-panel {
+    width: 100% !important;
+    flex: none !important;
+  }
+  .converge-arrow {
+    transform: rotate(90deg) !important;
+  }
+  .converge-arrow svg {
+    width: 40px !important;
+    height: 30px !important;
+  }
+
+  /* ── Fix 12: Live consensus / streaming widget ── */
+  .consensus-price {
+    font-size: 28px !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* ── Fix 13: "Who It's For" persona cards ── */
+  .persona-section {
+    padding: 60px 20px !important;
+  }
+  .persona-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .persona-card-inner {
+    padding: 28px 22px !important;
+    border-radius: 14px !important;
+  }
+  .persona-card-inner h3 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+  }
+  .persona-card-inner p {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+  .persona-card-inner span:last-child {
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+    margin-top: 16px !important;
+  }
+
+  /* ── Fix 14: CTA / Waitlist section ── */
+  .cta-section {
+    padding: 60px 20px !important;
+    text-align: center !important;
+  }
+  .cta-section h2 {
+    font-size: clamp(26px, 7vw, 40px) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 24px !important;
+  }
+  .cta-form {
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+  }
+  .cta-form input {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    font-size: 16px !important;
+    border-radius: 8px !important;
+    border-right: 1px solid #333 !important;
+    text-align: center !important;
+  }
+  .cta-form button {
+    width: 100% !important;
+    padding: 14px 20px !important;
+    font-size: 16px !important;
+    border-radius: 8px !important;
+  }
+
+  /* ── Fix 15: Footer ── */
+  footer {
+    padding: 24px 20px !important;
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+  }
+  footer > * {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* ── Fix 16: Touch targets (44px minimum) ── */
+  a, button, [role="button"], input[type="submit"] {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Fix 17: Input font size — prevent iOS zoom on focus ── */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* ── Grids that were already handled ── */
   .features-grid {
     grid-template-columns: 1fr !important;
   }
   .steps-grid {
     grid-template-columns: 1fr !important;
   }
+
+  /* ── Performance: GPU-promote animated elements ── */
+  .ticker-strip > div {
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  .persona-card-inner {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* ── Smooth scroll on iOS ── */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Wider phones: 2-col persona grid (480–768px) ── */
+@media (min-width: 480px) and (max-width: 768px) {
+  .persona-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ── Extra-small phones (≤480px) ── */
+@media (max-width: 480px) {
+  /* Nav tighter */
+  nav {
+    padding: 10px 16px !important;
+  }
+
+  /* Hero even tighter */
+  .hero-text {
+    padding: 52px 16px 40px !important;
+  }
+  .hero-text h1 {
+    font-size: clamp(28px, 8.5vw, 38px) !important;
+  }
+
+  /* About grid tighter */
+  .about-grid {
+    padding: 40px 16px !important;
+    gap: 20px !important;
+  }
+
+  /* Persona section */
+  .persona-section {
+    padding: 48px 16px !important;
+  }
   .persona-grid {
     grid-template-columns: 1fr !important;
   }
+
+  /* CTA */
+  .cta-section {
+    padding: 48px 16px !important;
+  }
+
+  /* Feature cards */
+  .feature-card {
+    padding: 18px 14px !important;
+  }
+
+  /* Footer */
   footer {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    text-align: center !important;
+    padding: 20px 16px !important;
+  }
+}
+
+/* ── Safe area insets for iPhone notch / home indicator ── */
+@supports (padding: env(safe-area-inset-top)) {
+  @media (max-width: 768px) {
+    nav {
+      padding-top: max(12px, env(safe-area-inset-top)) !important;
+      padding-left: max(16px, env(safe-area-inset-left)) !important;
+      padding-right: max(16px, env(safe-area-inset-right)) !important;
+    }
+    footer {
+      padding-bottom: max(24px, env(safe-area-inset-bottom)) !important;
+    }
   }
 }

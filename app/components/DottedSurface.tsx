@@ -1,6 +1,17 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= breakpoint);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 export function DottedSurface({
   style,
@@ -11,8 +22,12 @@ export function DottedSurface({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animIdRef = useRef(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Skip the entire Three.js setup on mobile — no GPU cost at all
+    if (isMobile) return;
+
     const container = canvasRef.current?.parentElement;
     if (!canvasRef.current || !container) return;
 
@@ -109,7 +124,10 @@ export function DottedSurface({
       material.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [isMobile]);
+
+  // Don't even render the canvas element on mobile
+  if (isMobile) return null;
 
   return (
     <canvas
