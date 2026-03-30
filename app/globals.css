@@ -170,9 +170,6 @@ a {
   }
 
   /* ── Fix 5: Hero section ── */
-  .hero-animation {
-    display: none !important;
-  }
   /* Fix iOS 100vh — use dvh so hero doesn't extend behind address bar */
   .hero-section {
     min-height: 100dvh !important;
