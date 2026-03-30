@@ -25,6 +25,9 @@ export function DottedSurface({
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Skip the entire Three.js setup on mobile — causes scroll jank
+    if (isMobile) return;
+
     const container = canvasRef.current?.parentElement;
     if (!canvasRef.current || !container) return;
 
@@ -33,12 +36,9 @@ export function DottedSurface({
       height: container.clientHeight || window.innerHeight,
     });
 
-    // On mobile: fewer particles, lower pixel ratio, throttled animation
-    const SEPARATION = isMobile ? 180 : 120;
-    const AMOUNTX = isMobile ? 25 : 50;
-    const AMOUNTY = isMobile ? 25 : 50;
-    const PIXEL_RATIO = isMobile ? 1 : window.devicePixelRatio;
-    const ANIM_SPEED = isMobile ? 0.05 : 0.1;
+    const SEPARATION = 120;
+    const AMOUNTX = 50;
+    const AMOUNTY = 50;
 
     const scene = new THREE.Scene();
     const { width, height } = getSize();
@@ -49,10 +49,9 @@ export function DottedSurface({
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
-      antialias: !isMobile,
-      powerPreference: isMobile ? "low-power" : "default",
+      antialias: true,
     });
-    renderer.setPixelRatio(PIXEL_RATIO);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
 
@@ -75,10 +74,10 @@ export function DottedSurface({
     );
 
     const material = new THREE.PointsMaterial({
-      size: isMobile ? 8 : 10,
+      size: 10,
       color: 0xcccccc,
       transparent: true,
-      opacity: isMobile ? 0.85 : 0.85,
+      opacity: 0.85,
       sizeAttenuation: true,
     });
 
@@ -86,17 +85,9 @@ export function DottedSurface({
     scene.add(points);
 
     let count = 0;
-    let frameCount = 0;
 
     const animate = () => {
       animIdRef.current = requestAnimationFrame(animate);
-
-      // On mobile, only render every 2nd frame (30fps cap)
-      if (isMobile) {
-        frameCount++;
-        if (frameCount % 2 !== 0) return;
-      }
-
       const posArr = geometry.attributes.position.array as Float32Array;
       let i = 0;
       for (let ix = 0; ix < AMOUNTX; ix++) {
@@ -109,7 +100,7 @@ export function DottedSurface({
       }
       geometry.attributes.position.needsUpdate = true;
       renderer.render(scene, camera);
-      count += ANIM_SPEED;
+      count += 0.1;
     };
 
     const handleResize = () => {
@@ -134,6 +125,9 @@ export function DottedSurface({
       renderer.dispose();
     };
   }, [isMobile]);
+
+  // Don't render the canvas on mobile
+  if (isMobile) return null;
 
   return (
     <canvas
