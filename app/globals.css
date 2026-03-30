@@ -238,10 +238,8 @@ a {
     height: auto !important;
     max-width: 100% !important;
   }
-  /* Center feature card wrappers within the about-grid */
+  /* Ensure about-grid children stack vertically and take full width */
   .about-grid > div {
-    display: flex !important;
-    justify-content: center !important;
     width: 100% !important;
   }
 
