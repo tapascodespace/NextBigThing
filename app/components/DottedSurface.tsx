@@ -78,7 +78,7 @@ export function DottedSurface({
       size: isMobile ? 8 : 10,
       color: 0xcccccc,
       transparent: true,
-      opacity: isMobile ? 0.75 : 0.85,
+      opacity: isMobile ? 0.85 : 0.85,
       sizeAttenuation: true,
     });
 
