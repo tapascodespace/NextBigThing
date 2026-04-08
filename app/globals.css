@@ -186,11 +186,21 @@ a {
     letter-spacing: -0.02em !important;
   }
   /* Keep the animated word container functional — don't flatten to inline */
-  .hero-cta {
+  .hero-cta-group {
+    width: 100%;
+    flex-direction: column !important;
+    gap: 10px !important;
     margin-top: 28px !important;
+  }
+  .hero-cta {
     font-size: 16px !important;
-    padding: 14px 28px !important;
+    width: min(92vw, 320px) !important;
+    justify-content: center !important;
+    padding: 14px 22px !important;
     min-height: 44px !important;
+  }
+  .hero-cta-secondary {
+    border-color: rgba(240, 237, 232, 0.75) !important;
   }
 
   /* ── Fix 6: Section labels (/// 01 THE PROBLEM etc.) ── */

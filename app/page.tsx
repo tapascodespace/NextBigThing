@@ -735,46 +735,85 @@ function Hero() {
           with precision.
         </h1>
 
-        {/* CTA button */}
-        <a
-          href="#cta"
-          className="hero-cta"
+        {/* CTA buttons */}
+        <div
+          className="hero-cta-group"
           style={{
-            display: "inline-flex",
+            display: "flex",
             alignItems: "center",
-            gap: 12,
+            justifyContent: "center",
+            gap: 14,
             marginTop: "2rem",
-            fontFamily: sans,
-            fontSize: 14,
-            fontWeight: 500,
-            color: "#000",
-            background: "#f0ede8",
-            borderRadius: 999,
-            padding: "0.65rem 1rem 0.65rem 1.5rem",
-            transition: "opacity 0.2s",
             animation: "fadeUp 0.7s ease both",
             animationDelay: "0.45s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          Join the waitlist
-          <span
+          <a
+            href="#cta"
+            className="hero-cta"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+              fontFamily: sans,
+              fontSize: 14,
+              fontWeight: 500,
+              color: "#000",
+              background: "#f0ede8",
+              borderRadius: 999,
+              padding: "0.65rem 1rem 0.65rem 1.5rem",
+              transition: "opacity 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Join the waitlist
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 28,
+                height: 28,
+                borderRadius: "50%",
+                background: "#000",
+                color: "#fff",
+                fontSize: 14,
+              }}
+            >
+              &rsaquo;
+            </span>
+          </a>
+
+          <a
+            href="https://app.reeshaw.com"
+            className="hero-cta hero-cta-secondary"
             style={{
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 28,
-              height: 28,
-              borderRadius: "50%",
-              background: "#000",
-              color: "#fff",
+              fontFamily: sans,
               fontSize: 14,
+              fontWeight: 500,
+              color: "#f0ede8",
+              border: "1px solid rgba(240, 237, 232, 0.5)",
+              background: "rgba(0, 0, 0, 0.2)",
+              borderRadius: 999,
+              padding: "0.65rem 1.25rem",
+              transition: "opacity 0.2s, border-color 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "0.9";
+              e.currentTarget.style.borderColor = "rgba(240, 237, 232, 0.85)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.borderColor = "rgba(240, 237, 232, 0.5)";
             }}
           >
-            &rsaquo;
-          </span>
-        </a>
+            Try beta
+          </a>
+        </div>
       </div>
     </section>
   );
