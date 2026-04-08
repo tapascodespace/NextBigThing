@@ -479,7 +479,7 @@ function Nav() {
           aria-label={playing ? "Pause music" : "Play music"}
           style={{
             background: "none",
-            border: "1px solid rgba(255,255,255,0.2)",
+            border: "1px solid rgba(212, 151, 42, 0.55)",
             borderRadius: 999,
             width: 36,
             height: 36,
@@ -487,11 +487,20 @@ function Nav() {
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
-            transition: "border-color 0.2s",
+            boxShadow: "0 0 0 1px rgba(212, 151, 42, 0.2), 0 0 14px rgba(212, 151, 42, 0.45)",
+            transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
             gap: 2,
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)")}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "rgba(212, 151, 42, 0.95)";
+            e.currentTarget.style.boxShadow = "0 0 0 1px rgba(212, 151, 42, 0.35), 0 0 20px rgba(212, 151, 42, 0.7)";
+            e.currentTarget.style.transform = "translateY(-1px)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "rgba(212, 151, 42, 0.55)";
+            e.currentTarget.style.boxShadow = "0 0 0 1px rgba(212, 151, 42, 0.2), 0 0 14px rgba(212, 151, 42, 0.45)";
+            e.currentTarget.style.transform = "translateY(0)";
+          }}
         >
           {/* Animated bars */}
           {[0, 1, 2, 3].map((i) => (
@@ -1644,7 +1653,7 @@ function Footer() {
       >
         REESHAW
       </span>
-      <span style={{ fontSize: 15, color: "#555" }}>reeshaw.ai</span>
+      <span style={{ fontSize: 15, color: "#555" }}>reeshaw.com</span>
       <span
         style={{
           fontSize: 15,
