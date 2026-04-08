@@ -3,8 +3,10 @@
 import { useEffect, useMemo, useRef, useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
+import { Instagram, Twitter } from "lucide-react";
 import { DottedSurface } from "./components/DottedSurface";
 import { GlowingEffect } from "./components/ui/glowing-effect";
+import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 
 /* ───────── helpers ───────── */
 const sans = "var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif";
@@ -51,6 +53,23 @@ const slowTransition = {
   duration: 1,
   ease: [0.22, 1, 0.36, 1] as const,
 };
+
+const footerSocialLinks: SocialItem[] = [
+  {
+    href: "https://www.instagram.com/reeshawtrade/",
+    ariaLabel: "Instagram",
+    tooltip: "Instagram",
+    color: "#E1306C",
+    Icon: Instagram,
+  },
+  {
+    href: "https://x.com/ReeshawTrade",
+    ariaLabel: "X (Twitter)",
+    tooltip: "X / Twitter",
+    color: "#111111",
+    Icon: Twitter,
+  },
+];
 
 /* ===================================================================
    BINARY PAYOFF CHART — Section 01 graphic
@@ -1639,6 +1658,7 @@ function Footer() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        gap: "1rem",
         fontFamily: sans,
         background: "#fff",
       }}
@@ -1653,7 +1673,18 @@ function Footer() {
       >
         REESHAW
       </span>
-      <span style={{ fontSize: 15, color: "#555" }}>reeshaw.com</span>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
+        }}
+      >
+        <span style={{ fontSize: 15, color: "#555" }}>reeshaw.com</span>
+        <SocialTooltip items={footerSocialLinks} aria-label="Reeshaw social links" />
+      </div>
       <span
         style={{
           fontSize: 15,
