@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, FormEvent, type SVGProps } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
-import { Instagram, Twitter } from "lucide-react";
 import { DottedSurface } from "./components/DottedSurface";
 import { GlowingEffect } from "./components/ui/glowing-effect";
 import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
@@ -54,20 +53,39 @@ const slowTransition = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
+function InstagramIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function XIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M4 4l16 16" />
+      <path d="M20 4L4 20" />
+    </svg>
+  );
+}
+
 const footerSocialLinks: SocialItem[] = [
   {
     href: "https://www.instagram.com/reeshawtrade/",
     ariaLabel: "Instagram",
     tooltip: "Instagram",
     color: "#E1306C",
-    Icon: Instagram,
+    Icon: InstagramIcon,
   },
   {
     href: "https://x.com/ReeshawTrade",
     ariaLabel: "X (Twitter)",
     tooltip: "X / Twitter",
     color: "#111111",
-    Icon: Twitter,
+    Icon: XIcon,
   },
 ];
 
@@ -518,7 +536,7 @@ function Nav() {
               e.currentTarget.style.background = "rgba(255,255,255,0.06)";
             }}
           >
-            <Instagram size={16} />
+            <InstagramIcon width={16} height={16} />
           </a>
           <a
             href="https://x.com/ReeshawTrade"
@@ -546,7 +564,7 @@ function Nav() {
               e.currentTarget.style.background = "rgba(255,255,255,0.06)";
             }}
           >
-            <Twitter size={16} />
+            <XIcon width={16} height={16} />
           </a>
         </div>
 
