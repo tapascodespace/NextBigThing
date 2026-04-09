@@ -491,6 +491,64 @@ function Nav() {
         >
           Contact
         </a>
+        <div className="desktop-social-links" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <a
+            href="https://www.instagram.com/reeshawtrade/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 999,
+              border: "1px solid rgba(255,255,255,0.25)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#fff",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(225,48,108,0.9)";
+              e.currentTarget.style.background = "rgba(225,48,108,0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+            }}
+          >
+            <Instagram size={16} />
+          </a>
+          <a
+            href="https://x.com/ReeshawTrade"
+            aria-label="X / Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 999,
+              border: "1px solid rgba(255,255,255,0.25)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#fff",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.95)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+            }}
+          >
+            <Twitter size={16} />
+          </a>
+        </div>
 
         {/* Music toggle */}
         <button

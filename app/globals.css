@@ -152,6 +152,9 @@ a {
   .nav-links {
     display: none !important;
   }
+  .desktop-social-links {
+    display: none !important;
+  }
   .nav-cta {
     font-size: 13px !important;
     padding: 8px 16px !important;
