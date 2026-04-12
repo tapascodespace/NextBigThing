@@ -10,30 +10,61 @@ import { SocialTooltip, type SocialItem } from "@/components/ui/social-media";
 /* ───────── helpers ───────── */
 const sans = "var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif";
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= breakpoint);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 /* ───────── Framer Motion animation variants ───────── */
+
+/* Desktop: full blur + transform animations */
 const fadeUp = {
   hidden: { opacity: 0, y: 40, filter: "blur(4px)" },
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
-
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
-
 const slideFromLeft = {
   hidden: { opacity: 0, x: -60, filter: "blur(4px)" },
   visible: { opacity: 1, x: 0, filter: "blur(0px)" },
 };
-
 const slideFromRight = {
   hidden: { opacity: 0, x: 60, filter: "blur(4px)" },
   visible: { opacity: 1, x: 0, filter: "blur(0px)" },
 };
-
 const scaleUp = {
   hidden: { opacity: 0, scale: 0.92, filter: "blur(6px)" },
   visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
+};
+
+/* Mobile: lightweight opacity + small translate only — no blur, no scale */
+const fadeUpMobile = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+const fadeInMobile = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0 },
+};
+const slideFromLeftMobile = {
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0 },
+};
+const slideFromRightMobile = {
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0 },
+};
+const scaleUpMobile = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
 };
 
 const staggerContainer = {
@@ -47,11 +78,33 @@ const smoothTransition = {
   duration: 0.8,
   ease: [0.22, 1, 0.36, 1] as const,
 };
+const smoothTransitionMobile = {
+  duration: 0.4,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
 
 const slowTransition = {
   duration: 1,
   ease: [0.22, 1, 0.36, 1] as const,
 };
+const slowTransitionMobile = {
+  duration: 0.5,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
+
+/** Returns the right set of variants & transitions based on viewport width. */
+function useMotionSet() {
+  const mobile = useIsMobile();
+  return useMemo(() => ({
+    fadeUp: mobile ? fadeUpMobile : fadeUp,
+    fadeIn: mobile ? fadeInMobile : fadeIn,
+    slideFromLeft: mobile ? slideFromLeftMobile : slideFromLeft,
+    slideFromRight: mobile ? slideFromRightMobile : slideFromRight,
+    scaleUp: mobile ? scaleUpMobile : scaleUp,
+    smooth: mobile ? smoothTransitionMobile : smoothTransition,
+    slow: mobile ? slowTransitionMobile : slowTransition,
+  }), [mobile]);
+}
 
 function InstagramIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -401,6 +454,7 @@ export default function Home() {
 
 /* ───────── NAV ───────── */
 function Nav() {
+  const isMobile = useIsMobile();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(true);
 
@@ -451,8 +505,8 @@ function Nav() {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "1.25rem 3rem",
-        background: "rgba(8,8,8,0.85)",
-        backdropFilter: "blur(12px)",
+        background: isMobile ? "rgba(8,8,8,0.95)" : "rgba(8,8,8,0.85)",
+        backdropFilter: isMobile ? "none" : "blur(12px)",
         borderBottom: "1px solid rgba(255,255,255,0.1)",
         fontFamily: sans,
       }}
@@ -490,7 +544,7 @@ function Nav() {
         </div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+      <div className="nav-actions" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <a
           href="#cta"
           className="nav-cta"
@@ -509,6 +563,48 @@ function Nav() {
         >
           Contact
         </a>
+        <div className="mobile-social-links" style={{ display: "none", alignItems: "center", gap: "0.45rem" }}>
+          <a
+            href="https://www.instagram.com/reeshawtrade/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 999,
+              border: "1px solid rgba(255,255,255,0.25)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#fff",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+          >
+            <InstagramIcon width={15} height={15} />
+          </a>
+          <a
+            href="https://x.com/ReeshawTrade"
+            aria-label="X / Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 999,
+              border: "1px solid rgba(255,255,255,0.25)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#fff",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+          >
+            <XIcon width={15} height={15} />
+          </a>
+        </div>
         <div className="desktop-social-links" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <a
             href="https://www.instagram.com/reeshawtrade/"
@@ -925,6 +1021,7 @@ function Hero() {
 
 /* ───────── ABOUT US (forum.market style) ───────── */
 function AboutUs() {
+  const m = useMotionSet();
   return (
     <>
       {/* ── Block 01: The Problem ── */}
@@ -942,11 +1039,11 @@ function AboutUs() {
         }}
       >
         <motion.div
-          variants={slideFromLeft}
+          variants={m.slideFromLeft}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={smoothTransition}
+          transition={m.smooth}
         >
           <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 700, letterSpacing: "0.15em", color: "#d4972a" }}>
             /// 01 THE PROBLEM
@@ -967,11 +1064,11 @@ function AboutUs() {
 
         {/* Right — dark card graphic */}
         <motion.div
-          variants={scaleUp}
+          variants={m.scaleUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ ...smoothTransition, delay: 0.2 }}
+          transition={{ ...m.smooth, delay: 0.2 }}
           style={{ display: "flex", justifyContent: "center" }}
         >
           <BinaryPayoffChart />
@@ -995,11 +1092,11 @@ function AboutUs() {
       >
         {/* Left — animated chart card */}
         <motion.div
-          variants={scaleUp}
+          variants={m.scaleUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={smoothTransition}
+          transition={m.smooth}
           style={{ display: "flex", justifyContent: "center" }}
         >
           <LinearPayoffChart />
@@ -1007,11 +1104,11 @@ function AboutUs() {
 
         {/* Right — text */}
         <motion.div
-          variants={slideFromRight}
+          variants={m.slideFromRight}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ ...smoothTransition, delay: 0.15 }}
+          transition={{ ...m.smooth, delay: 0.15 }}
         >
           <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 700, letterSpacing: "0.15em", color: "#d4972a" }}>
             /// 02 THE SOLUTION
@@ -1065,8 +1162,9 @@ const featureBlocks = [
 ];
 
 function FeatureBlock({ block, index }: { block: typeof featureBlocks[0]; index: number }) {
-  const textVariant = block.side === "left" ? slideFromLeft : slideFromRight;
-  const visualVariant = block.side === "left" ? slideFromRight : slideFromLeft;
+  const m = useMotionSet();
+  const textVariant = block.side === "left" ? m.slideFromLeft : m.slideFromRight;
+  const visualVariant = block.side === "left" ? m.slideFromRight : m.slideFromLeft;
   // Alternating: 03=white, 04=grey, 05=white (continues from AboutUs: 01=white, 02=grey)
   const bg = index % 2 === 0 ? "#fff" : "#f5f5f5";
 
@@ -1091,7 +1189,7 @@ function FeatureBlock({ block, index }: { block: typeof featureBlocks[0]; index:
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={smoothTransition}
+          transition={m.smooth}
           style={{ direction: "ltr" }}
         >
           <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 700, letterSpacing: "0.15em", color: "#d4972a" }}>
@@ -1125,7 +1223,7 @@ function FeatureBlock({ block, index }: { block: typeof featureBlocks[0]; index:
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ ...smoothTransition, delay: 0.15 }}
+          transition={{ ...m.smooth, delay: 0.15 }}
           style={{ direction: "ltr", display: "flex", justifyContent: "center" }}
         >
           <FeatureVisual index={index} />
@@ -1550,17 +1648,18 @@ function PersonaCard({ icon, title, subtitle, body, tag }: typeof personas[0]) {
 }
 
 function WhoItsFor() {
+  const m = useMotionSet();
   return (
     <section
       className="persona-section"
       style={{ padding: "8rem 4rem", maxWidth: 1200, margin: "0 auto" }}
     >
       <motion.div
-        variants={fadeUp}
+        variants={m.fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        transition={slowTransition}
+        transition={m.slow}
         style={{ textAlign: "center", marginBottom: "5rem" }}
       >
         <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 700, letterSpacing: "0.15em", color: "#d4972a" }}>
@@ -1592,7 +1691,7 @@ function WhoItsFor() {
         className="persona-grid"
       >
         {personas.map((p) => (
-          <motion.div key={p.title} variants={fadeUp} transition={smoothTransition}>
+          <motion.div key={p.title} variants={m.fadeUp} transition={m.smooth}>
             <PersonaCard {...p} />
           </motion.div>
         ))}
@@ -1603,6 +1702,7 @@ function WhoItsFor() {
 
 /* ───────── CTA ───────── */
 function CTA() {
+  const m = useMotionSet();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -1630,11 +1730,11 @@ function CTA() {
 
   return (
     <motion.section
-      variants={fadeUp}
+      variants={m.fadeUp}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      transition={slowTransition}
+      transition={m.slow}
       id="cta"
       className="cta-section"
       style={{
@@ -1721,13 +1821,14 @@ function CTA() {
 
 /* ───────── FOOTER ───────── */
 function Footer() {
+  const m = useMotionSet();
   return (
     <motion.footer
-      variants={fadeIn}
+      variants={m.fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
-      transition={smoothTransition}
+      transition={m.smooth}
       style={{
         borderTop: "1px solid #e0e0e0",
         padding: "3rem 4rem",
